@@ -1,15 +1,9 @@
 package com.np;
 
-import com.np.BigBoiCompany.BeachHotel.Beach.Beach;
 import com.np.BigBoiCompany.BeachHotel.BeachHotel;
 import com.np.BigBoiCompany.BigBoiCompany;
-import com.np.BigBoiCompany.Restaurant.DinningHall.DinningHall;
-import com.np.BigBoiCompany.Restaurant.Kitchen.Kitchen;
-import com.np.BigBoiCompany.Restaurant.Menu.Menu;
 import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 import com.np.BigBoiCompany.Restaurant.Restaurant;
-import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
-import com.np.BigBoiCompany.SharedComponent.SkiHotel;
 import com.np.BigBoiCompany.SkiResort.SkiResort;
 
 import java.util.ArrayList;
@@ -37,7 +31,10 @@ public class Main {
         restaurant.makeAnOrder(intArrL);
         restaurant.checkProfit();
 
-        BigBoiCompany bigBoiCompany = new BigBoiCompany(ski, beach, restaurant);
+        BigBoiCompany bigBoiCompany = new BigBoiCompany();
+        bigBoiCompany.addAssets(ski);
+        bigBoiCompany.addAssets(beach);
+        bigBoiCompany.addAssets(restaurant);
         bigBoiCompany.companyProfit();
 
     }

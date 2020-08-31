@@ -12,20 +12,14 @@ import java.util.ArrayList;
 
 public class SkiRent {
 
-    private double profit;
-    private ArrayList<SkiType> skis;
-    private ArrayList<SkiShoes> shoes;
-    private ArrayList<SkiShoes> availableShoes;
-    private ArrayList<SkiShoes> takenShoes;
+    private double profit = 0;
+    private ArrayList<SkiType> skis = new ArrayList<>();;
+    private ArrayList<SkiShoes> shoes = new ArrayList<>();;
+    private ArrayList<SkiShoes> availableShoes = new ArrayList<>();;
+    private ArrayList<SkiShoes> takenShoes = new ArrayList<>();;
 
 
     public SkiRent() {
-        this.profit = 0;
-        this.skis = new ArrayList<>();
-        this.shoes = new ArrayList<>();
-        this.availableShoes = new ArrayList<>();
-        this.takenShoes = new ArrayList<>();
-
         populateSki();
         populateSkiShoes();
     }
@@ -65,7 +59,6 @@ public class SkiRent {
         System.out.println("The profit of the Ski is " + Utility.formatNumber(profit));
         System.out.println();
     }
-
 
     public void rentSki(int skiLength, int rentHours) {
         int countSki = 0;
