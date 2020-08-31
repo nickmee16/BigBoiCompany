@@ -1,6 +1,7 @@
 package com.np.BigBoiCompany.Restaurant.DinningHall;
 
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 
 import java.util.ArrayList;
 
@@ -75,9 +76,9 @@ public class DinningHall {
         menu.printMenu();
     }
 
-    public void makeAnOrder(ArrayList<Integer> orderedItems) {
+    public void makeAnOrder(ArrayList<MenuItemsEnum> orderedItems) {
         double orderPrice = 0;
-        for (Integer orderedItem: orderedItems) {
+        for (MenuItemsEnum orderedItem: orderedItems) {
             orderPrice = orderPrice + menu.getPriceForItem(orderedItem);
             ordersForKitchen(menu.kitchenOrder(orderedItem));
             menu.getOrderInfo(orderedItem);

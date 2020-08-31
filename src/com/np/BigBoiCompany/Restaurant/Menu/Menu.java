@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class Menu {
 
     private ArrayList<Items> items;
-    private HashMap<Integer, Items> itemsMap;
+    private HashMap<MenuItemsEnum, Items> itemsMap;
 
 
     public Menu() {
@@ -26,27 +26,27 @@ public class Menu {
     }
 
     private void populateItemsMap() {
-        itemsMap.put(1, new Salad());
-        itemsMap.put(2, new Dish());
-        itemsMap.put(3, new Dessert());
-        itemsMap.put(4, new Water());
-        itemsMap.put(5, new Juice());
-        itemsMap.put(6, new NonAlcoholic());
-        itemsMap.put(7, new Alcoholic());
+        itemsMap.put(MenuItemsEnum.SALAD, new Salad());
+        itemsMap.put(MenuItemsEnum.DISH, new Dish());
+        itemsMap.put(MenuItemsEnum.DESERT, new Dessert());
+        itemsMap.put(MenuItemsEnum.WATER, new Water());
+        itemsMap.put(MenuItemsEnum.JUICE, new Juice());
+        itemsMap.put(MenuItemsEnum.NON_ALCOHOLIC, new NonAlcoholic());
+        itemsMap.put(MenuItemsEnum.ALCOHOL, new Alcoholic());
 
     }
 
-    public double getPriceForItem(Integer items) {
-        return itemsMap.get(items).getPrice();
+    public double getPriceForItem(MenuItemsEnum item) {
+        return itemsMap.get(item).getPrice();
     }
 
-    public void getOrderInfo(Integer items) {
-        itemsMap.get(items).getInfoItem();
+    public void getOrderInfo(MenuItemsEnum item) {
+        itemsMap.get(item).getInfoItem();
     }
 
-    public String kitchenOrder(Integer items) {
-        if(itemsMap.get(items).isFood()) {
-            return itemsMap.get(items).getName();
+    public String kitchenOrder(MenuItemsEnum item) {
+        if(itemsMap.get(item).isFood()) {
+            return itemsMap.get(item).getName();
         }
         return "";
     }

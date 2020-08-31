@@ -4,6 +4,7 @@ import com.np.BigBoiCompany.IProfitable;
 import com.np.BigBoiCompany.Restaurant.DinningHall.DinningHall;
 import com.np.BigBoiCompany.Restaurant.Kitchen.Kitchen;
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 import com.np.BigBoiCompany.Utility;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class Restaurant implements IProfitable {
         hall.printMenu();
     }
 
-    public void makeAnOrder(ArrayList<Integer> orderedItems) {
+    public void makeAnOrder(ArrayList<MenuItemsEnum> orderedItems) {
         hall.makeAnOrder(orderedItems);
     }
 

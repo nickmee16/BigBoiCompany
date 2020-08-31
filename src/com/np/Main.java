@@ -6,6 +6,7 @@ import com.np.BigBoiCompany.BigBoiCompany;
 import com.np.BigBoiCompany.Restaurant.DinningHall.DinningHall;
 import com.np.BigBoiCompany.Restaurant.Kitchen.Kitchen;
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 import com.np.BigBoiCompany.Restaurant.Restaurant;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.SkiHotel;
@@ -29,10 +30,10 @@ public class Main {
         beach.checkProfit();
 
         Restaurant restaurant = new Restaurant("Rest");
-        ArrayList<Integer> intArrL = new ArrayList<>();
-        intArrL.add(2);
-        intArrL.add(3);
-        intArrL.add(5);
+        ArrayList<MenuItemsEnum> intArrL = new ArrayList<>();
+        intArrL.add(MenuItemsEnum.JUICE);
+        intArrL.add(MenuItemsEnum.DESERT);
+        intArrL.add(MenuItemsEnum.SALAD);
         restaurant.makeAnOrder(intArrL);
         restaurant.checkProfit();
 
