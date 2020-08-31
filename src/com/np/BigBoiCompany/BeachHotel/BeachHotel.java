@@ -1,6 +1,7 @@
 package com.np.BigBoiCompany.BeachHotel;
 
 import com.np.BigBoiCompany.BeachHotel.Beach.Beach;
+import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.IProfitable;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.BeachHotelComponent;
@@ -36,11 +37,11 @@ public class BeachHotel implements IProfitable {
         hotel.returnKeys(apartmentNumber);
     }
 
-    public void rentBeachChair(String beachChair, int rentHours, boolean isHotelUser) {
+    public void rentBeachChair(BeachChairEnum beachChair, int rentHours, boolean isHotelUser) {
         beach.rentChair(beachChair, rentHours, isHotelUser);
     }
 
-    public void returnBeachChair(String beachChair) {
+    public void returnBeachChair(BeachChairEnum beachChair) {
         beach.returnBeachChair(beachChair);
     }
 

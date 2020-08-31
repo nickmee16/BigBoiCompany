@@ -14,7 +14,7 @@ public abstract class Hotel {
     private ArrayList<Integer> takenApartments;
     private double profit;
 
-    public Hotel(int floors, int apartments) {
+    protected Hotel(int floors, int apartments) {
         this.floors = floors;
         this.apartments = apartments;
         this.limitFloors = 2;

@@ -1,13 +1,14 @@
 package com.np.BigBoiCompany.BeachHotel.Beach.BeachChair;
 
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChair;
+import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.Utility;
 
 
-public class Chair2 extends BeachChair {
+public class LeatherChair extends BeachChair {
 
-    public Chair2() {
-        super("Wooden", 3.50, 5.00);
+    public LeatherChair() {
+        super(BeachChairEnum.LEATHER, 5.45, 7.55);
     }
 
     @Override

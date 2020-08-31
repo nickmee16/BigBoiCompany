@@ -1,5 +1,6 @@
 package com.np;
 
+import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.BeachHotel.BeachHotel;
 import com.np.BigBoiCompany.BigBoiCompany;
 import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
@@ -20,7 +21,7 @@ public class Main {
 
         BeachHotel beach = new BeachHotel("Bitch");
         beach.rentApartment(7, 10);
-        beach.rentBeachChair("Leather", 5, true);
+        beach.rentBeachChair(BeachChairEnum.LEATHER, 5, true);
         beach.checkProfit();
 
         Restaurant restaurant = new Restaurant("Rest");
