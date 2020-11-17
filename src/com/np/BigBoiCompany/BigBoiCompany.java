@@ -1,28 +1,27 @@
 package com.np.BigBoiCompany;
 
-import com.np.BigBoiCompany.BeachHotel.BeachHotel;
+import com.np.BigBoiCompany.BeachHotel.BeachResort;
 import com.np.BigBoiCompany.Restaurant.Restaurant;
+import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
+import com.np.BigBoiCompany.SharedComponent.Base.HotelTypes;
 import com.np.BigBoiCompany.SkiResort.SkiResort;
 
 import java.util.ArrayList;
-import java.util.EnumSet;
 import java.util.HashMap;
 
 public class BigBoiCompany {
     private ArrayList<IProfitable> assets = new ArrayList<>();
-    private ArrayList<IShowHotelIngo> infos = new ArrayList<>();
-    private ArrayList<HotelsEnum> hotelsEnums = new ArrayList<>(EnumSet.allOf(HotelsEnum.class));
-    private HashMap<HotelsEnum, IShowHotelIngo> availableHotels = new HashMap<>();
+    private HashMap<HotelTypes, Hotel> availableHotels = new HashMap<>();
     private SkiResort skiResort;
-    private BeachHotel beachHotel;
+    private BeachResort beachResort;
     private Restaurant restaurant;
 
-    public BigBoiCompany(SkiResort skiResort, BeachHotel beachHotel, Restaurant restaurant) {
-        this.skiResort = skiResort;
-        this.beachHotel = beachHotel;
-        this.restaurant = restaurant;
+    public BigBoiCompany() {
+        this.skiResort = new SkiResort("Ski");
+        this.beachResort = new BeachResort("Bitch");
+        this.restaurant = new Restaurant("Rest");
 
-        populateInfos();
+
         populateAvailableHotels();
         populateAssets();
 
@@ -30,7 +29,7 @@ public class BigBoiCompany {
 
     private void populateAssets() {
         assets.add(skiResort);
-        assets.add(beachHotel);
+        assets.add(beachResort);
         assets.add(restaurant);
     }
 
@@ -44,32 +43,27 @@ public class BigBoiCompany {
         System.out.println("Big Boi Company Profit: " + Utility.formatNumber(profit) + "$");
     }
 
-    private void populateInfos() {
-        infos.add(skiResort);
-        infos.add(beachHotel);
-    }
 
     public void populateAvailableHotels() {
-        for(int i = 0; i < infos.size(); i++) {
-            availableHotels.put(hotelsEnums.get(i), infos.get(i));
-        }
+        this.availableHotels.put(skiResort.getHotel().getType(), skiResort.getHotel());
+        this.availableHotels.put(beachResort.getHotel().getType(), beachResort.getHotel());
     }
 
     public void showAvailableHotels() {
-        for (int i = 0; i < infos.size(); i++) {
-            infos.get(i).info();
+        for (Hotel hotel: availableHotels.values()) {
+            hotel.info();
         }
     }
 
-    public void showAvailableApartments(HotelsEnum hotel) {
+    public void showAvailableApartments(HotelTypes hotel) {
         availableHotels.get(hotel).showAvailableApartments();
     }
 
-    public void rentApartment(HotelsEnum hotel, int numApartment, int days) {
+    public void rentApartment(HotelTypes hotel, int numApartment, int days) {
         availableHotels.get(hotel).rentApartment(numApartment, days);
     }
 
-    public void returnKeysApartment(HotelsEnum hotel, int apartmentNumber) {
-        availableHotels.get(hotel).returnKeysApartment(apartmentNumber);
+    public void returnKeysApartment(HotelTypes hotel, int apartmentNumber) {
+        availableHotels.get(hotel).returnKeys(apartmentNumber);
     }
 }

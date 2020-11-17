@@ -3,21 +3,20 @@ package com.np.BigBoiCompany.BeachHotel;
 import com.np.BigBoiCompany.BeachHotel.Beach.Beach;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.IProfitable;
-import com.np.BigBoiCompany.IShowHotelIngo;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
-import com.np.BigBoiCompany.SharedComponent.BeachHotelComponent;
+import com.np.BigBoiCompany.SharedComponent.BeachHotel;
 import com.np.BigBoiCompany.Utility;
 
-public class BeachHotel implements IProfitable, IShowHotelIngo {
+public class BeachResort implements IProfitable {
 
     private String name;
     private Beach beach;
     private Hotel hotel;
 
-    public BeachHotel(String name) {
+    public BeachResort(String name) {
         this.name = name;
         this.beach = new Beach();
-        this.hotel = new BeachHotelComponent();
+        this.hotel = new BeachHotel();
     }
 
     @Override
@@ -30,26 +29,6 @@ public class BeachHotel implements IProfitable, IShowHotelIngo {
         System.out.println();
     }
 
-    @Override
-    public void info() {
-        System.out.println(name);
-    }
-
-    @Override
-    public void showAvailableApartments() {
-        hotel.showAvailableApartments();
-    }
-
-    @Override
-    public void rentApartment(int apartmentNumber, int rentDays) {
-        hotel.rentApartment(apartmentNumber, rentDays);
-    }
-
-    @Override
-    public void returnKeysApartment(int apartmentNumber) {
-        hotel.returnKeys(apartmentNumber);
-    }
-
     public void rentBeachChair(BeachChairEnum beachChair, int rentHours, boolean isHotelUser) {
         beach.rentChair(beachChair, rentHours, isHotelUser);
     }
@@ -60,5 +39,9 @@ public class BeachHotel implements IProfitable, IShowHotelIngo {
 
     public void checkAvailableBeachChairs() {
         beach.checkOffers();
+    }
+
+    public Hotel getHotel() {
+        return hotel;
     }
 }

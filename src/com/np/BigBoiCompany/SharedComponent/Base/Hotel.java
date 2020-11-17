@@ -15,8 +15,9 @@ public abstract class Hotel {
     private ArrayList<Integer> availableApartments;
     private ArrayList<Integer> takenApartments;
     private double profit;
+    private HotelTypes type;
 
-    protected Hotel(int floors, int apartments) {
+    protected Hotel(int floors, int apartments, HotelTypes type) {
         this.floors = floors;
         this.apartments = apartments;
         this.limitFloors = 2;
@@ -25,6 +26,7 @@ public abstract class Hotel {
         this.availableApartments = new ArrayList<>();
         this.takenApartments = new ArrayList<>();
         this.profit = 0;
+        this.type = type;
 
 
         setApartments(apartments);
@@ -107,6 +109,10 @@ public abstract class Hotel {
             System.out.println("Wrong number or the apartment is free.");
             System.out.println();
         }
+    }
+
+    public HotelTypes getType() {
+        return type;
     }
 
     public abstract void info();

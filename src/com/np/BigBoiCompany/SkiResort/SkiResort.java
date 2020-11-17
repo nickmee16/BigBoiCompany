@@ -1,7 +1,6 @@
 package com.np.BigBoiCompany.SkiResort;
 
 import com.np.BigBoiCompany.IProfitable;
-import com.np.BigBoiCompany.IShowHotelIngo;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.SkiHotel;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
@@ -26,10 +25,6 @@ public class SkiResort implements IProfitable {
         return hotel.getProfit() + skiRent.getProfit();
     }
 
-    @Override
-    public void info() {
-        System.out.println(name);
-    }
 
     public void getInfo() {
         System.out.println(name);
@@ -40,19 +35,8 @@ public class SkiResort implements IProfitable {
         System.out.println();
     }
 
-    @Override
-    public void showAvailableApartments() {
-        hotel.showAvailableApartments();
-    }
-
-    @Override
-    public void rentApartment(int apartmentNumber, int rentDays) {
-        hotel.rentApartment(apartmentNumber, rentDays);
-    }
-
-    @Override
-    public void returnKeysApartment(int apartmentNumber) {
-        hotel.returnKeys(apartmentNumber);
+    public Hotel getHotel() {
+        return hotel;
     }
 
     public void rentSki(SkiSizeTypes skiLength, int rentHours) {
