@@ -1,6 +1,7 @@
 package com.np.BigBoiCompany.Restaurant.Menu.Items;
 
 import com.np.BigBoiCompany.Restaurant.Menu.Items.Base.Items;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 import com.np.BigBoiCompany.Utility;
 
 
@@ -8,7 +9,7 @@ import java.text.DecimalFormat;
 
 public class Alcoholic extends Items {
     public Alcoholic() {
-        super("Jack Daniels", 0.050, 7.50 , false);
+        super(MenuItemsEnum.ALCOHOL, 0.050, 7.50 , false);
     }
 
     @Override

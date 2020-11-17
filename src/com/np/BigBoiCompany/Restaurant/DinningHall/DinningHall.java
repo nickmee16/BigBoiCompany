@@ -8,20 +8,17 @@ import java.util.ArrayList;
 public class DinningHall {
 
     private int tables;
-    private Menu menu;
-    private int tablesLimit;
-    private double profit;
-    private ArrayList<String> tableCounter;
-    ArrayList<String> strItems;
+    private final Menu menu;
+    private int tablesLimit = 25;
+    private double profit = 0;
+    private final ArrayList<String> tableCounter = new ArrayList<>();
+    private final ArrayList<MenuItemsEnum> itemsForKitchen = new ArrayList<>();
+    private final ArrayList<MenuItemsEnum> itemsForBar = new ArrayList<>();
 
 
     public DinningHall(int tables, Menu menu) {
         this.tables = tables;
         this.menu = menu;
-        this.tablesLimit = 25;
-        this.profit = 0;
-        this.tableCounter = new ArrayList<>();
-        this.strItems = new ArrayList<>();
         setTables(tables);
         populateTables();
     }
@@ -30,8 +27,8 @@ public class DinningHall {
         return profit;
     }
 
-    public ArrayList<String> getStrItems() {
-        return strItems;
+    public ArrayList<MenuItemsEnum> getItemsForKitchen() {
+        return itemsForKitchen;
     }
 
     private void setTables(int tables) {
@@ -76,25 +73,14 @@ public class DinningHall {
         menu.printMenu();
     }
 
-    public void makeAnOrder(ArrayList<MenuItemsEnum> orderedItems) {
-        double orderPrice = 0;
-        for (MenuItemsEnum orderedItem: orderedItems) {
-            orderPrice = orderPrice + menu.getPriceForItem(orderedItem);
-            ordersForKitchen(menu.kitchenOrder(orderedItem));
-            menu.getOrderInfo(orderedItem);
+    public void orderItem(MenuItemsEnum item) {
+        profit += menu.getItem(item).getPrice();
+
+        if(menu.getItem(item).isFood()) {
+            itemsForKitchen.add(item);
+        } else {
+            itemsForBar.add(item);
         }
-        profit += orderPrice;
     }
 
-    private ArrayList<String> ordersForKitchen(String item) {
-        strItems.add(item);
-
-        for (int i = 0; i < strItems.size(); i++) {
-            if(strItems.get(i).equals("")) {
-                strItems.remove(i);
-            }
-        }
-
-        return strItems;
-    }
 }

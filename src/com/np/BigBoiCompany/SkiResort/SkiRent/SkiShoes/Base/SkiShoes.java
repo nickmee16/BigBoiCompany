@@ -1,18 +1,20 @@
 package com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base;
 
+import com.np.BigBoiCompany.SkiResort.SkiRent.SkiBrands;
+
 public abstract class SkiShoes {
 
-    private String brand;
+    private SkiBrands brand;
     private double rentPricePerHour;
     private int shoeSize;
 
-    public SkiShoes(String brand, double rentPricePerHour, int shoeSize) {
+    public SkiShoes(SkiBrands brand, double rentPricePerHour, int shoeSize) {
         this.brand = brand;
         this.rentPricePerHour = rentPricePerHour;
         this.shoeSize = shoeSize;
     }
 
-    public String getBrand() {
+    public SkiBrands getBrand() {
         return brand;
     }
 

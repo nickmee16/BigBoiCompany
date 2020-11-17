@@ -1,12 +1,13 @@
 package com.np.BigBoiCompany.Restaurant.Menu.Items;
 
 import com.np.BigBoiCompany.Restaurant.Menu.Items.Base.Items;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 
 import java.text.DecimalFormat;
 
 public class NonAlcoholic  extends Items {
     public NonAlcoholic() {
-        super("Pepsi Cola", 0.500, 2.00, false);
+        super(MenuItemsEnum.NON_ALCOHOLIC, 0.500, 2.00, false);
     }
 
     @Override

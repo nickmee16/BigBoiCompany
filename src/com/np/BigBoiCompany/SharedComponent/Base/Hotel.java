@@ -3,6 +3,7 @@ package com.np.BigBoiCompany.SharedComponent.Base;
 import com.np.BigBoiCompany.Utility;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public abstract class Hotel {
 
@@ -11,6 +12,7 @@ public abstract class Hotel {
     private int limitFloors;
     private int limitApartment;
     private double apartmentRent;
+    private ArrayList<Integer> availableApartments;
     private ArrayList<Integer> takenApartments;
     private double profit;
 
@@ -20,8 +22,14 @@ public abstract class Hotel {
         this.limitFloors = 2;
         this.limitApartment = 6;
         this.apartmentRent = 45;
+        this.availableApartments = new ArrayList<>();
         this.takenApartments = new ArrayList<>();
         this.profit = 0;
+
+
+        setApartments(apartments);
+        setFloors(floors);
+        populateAvailableApartments();
     }
 
     public double getProfit() {
@@ -54,25 +62,34 @@ public abstract class Hotel {
         }
     }
 
-    private boolean checkApartment(int number) {
-        int[] apartmentArray = new int[apartments * 2];
-        for (int i = 0; i < apartments * 2; i++) {
-            apartmentArray[i] = i + 1;
-            if (apartmentArray[i] == number) {
-                return true;
+    public void populateAvailableApartments() {
+        for(int i = 0; i < apartments; i++) {
+            availableApartments.add(i + 1);
+        }
+    }
+
+    public void showAvailableApartments() {
+        Collections.sort(availableApartments);
+
+        for(int i = 0; i < availableApartments.size(); i++) {
+
+            if(i == availableApartments.size() - 1) {
+                System.out.println(availableApartments.get(i));
+            } else {
+                System.out.print(availableApartments.get(i) + ", ");
             }
         }
-        return false;
     }
 
     public void rentApartment(int apartmentNumber, int days) {
-        if (checkApartment(apartmentNumber) && !takenApartments.contains(apartmentNumber)) {
+        if (availableApartments.contains(apartmentNumber)) {
             System.out.println("You rented apartment №"
                     + apartmentNumber + " for " + days + " days" +
                     "\n" + "Price: " + Utility.formatNumber(apartmentRent * days) + "$");
             System.out.println();
             profit = profit + (apartmentRent * days);
             takenApartments.add(apartmentNumber);
+            availableApartments.remove((Integer) apartmentNumber);
         } else {
             System.out.println("Wrong number or the apartment is already taken.");
             System.out.println();
@@ -85,10 +102,13 @@ public abstract class Hotel {
             System.out.println("You returned the keys for apartment №" + apartmentNumber);
             System.out.println();
             takenApartments.remove(ind);
+            availableApartments.add(apartmentNumber);
         } else {
             System.out.println("Wrong number or the apartment is free.");
             System.out.println();
         }
     }
+
+    public abstract void info();
 }
 

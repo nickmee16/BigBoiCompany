@@ -1,13 +1,14 @@
 package com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes;
 
+import com.np.BigBoiCompany.SkiResort.SkiRent.SkiBrands;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base.SkiShoes;
 import com.np.BigBoiCompany.Utility;
 
 
-public class Shoe2 extends SkiShoes {
+public class ShoeK2 extends SkiShoes {
 
-    public Shoe2(int size) {
-        super("Rossignol", 4.00, size);
+    public ShoeK2(int size) {
+        super(SkiBrands.K2, 4.20, size);
     }
 
     @Override

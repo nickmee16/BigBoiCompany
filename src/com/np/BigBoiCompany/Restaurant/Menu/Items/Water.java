@@ -1,12 +1,13 @@
 package com.np.BigBoiCompany.Restaurant.Menu.Items;
 
 import com.np.BigBoiCompany.Restaurant.Menu.Items.Base.Items;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 
 import java.text.DecimalFormat;
 
 public class Water extends Items {
     public Water() {
-        super("Bankq", 1.500, 2.50, false);
+        super(MenuItemsEnum.WATER, 1.500, 2.50, false);
     }
 
     @Override

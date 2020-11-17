@@ -59,14 +59,14 @@ public class Kitchen {
     }
 
     public void thingsToCook() {
-        if(hall.getStrItems().size() == 0) {
+        if(hall.getItemsForKitchen().size() == 0) {
             System.out.println("There is nothing to be cooked");
         } else {
             System.out.println("Things to cook:");
-            for (int i = 0; i < hall.getStrItems().size(); i++) {
-                System.out.println(hall.getStrItems().get(i));
+            for (int i = 0; i < hall.getItemsForKitchen().size(); i++) {
+                System.out.println(hall.getItemsForKitchen().get(i));
             }
-            hall.getStrItems().clear();
+            hall.getItemsForKitchen().clear();
         }
     }
 }

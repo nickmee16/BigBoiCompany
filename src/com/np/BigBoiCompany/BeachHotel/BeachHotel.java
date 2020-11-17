@@ -3,11 +3,12 @@ package com.np.BigBoiCompany.BeachHotel;
 import com.np.BigBoiCompany.BeachHotel.Beach.Beach;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.IProfitable;
+import com.np.BigBoiCompany.IShowHotelIngo;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.BeachHotelComponent;
 import com.np.BigBoiCompany.Utility;
 
-public class BeachHotel implements IProfitable {
+public class BeachHotel implements IProfitable, IShowHotelIngo {
 
     private String name;
     private Beach beach;
@@ -29,10 +30,22 @@ public class BeachHotel implements IProfitable {
         System.out.println();
     }
 
+    @Override
+    public void info() {
+        System.out.println(name);
+    }
+
+    @Override
+    public void showAvailableApartments() {
+        hotel.showAvailableApartments();
+    }
+
+    @Override
     public void rentApartment(int apartmentNumber, int rentDays) {
         hotel.rentApartment(apartmentNumber, rentDays);
     }
 
+    @Override
     public void returnKeysApartment(int apartmentNumber) {
         hotel.returnKeys(apartmentNumber);
     }

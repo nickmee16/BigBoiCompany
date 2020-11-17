@@ -1,12 +1,13 @@
 package com.np.BigBoiCompany.Restaurant.Menu.Items;
 
 import com.np.BigBoiCompany.Restaurant.Menu.Items.Base.Items;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 
 import java.text.DecimalFormat;
 
 public class Dessert extends Items {
     public Dessert() {
-        super("Fruit Cake", 0.400, 6.45, true);
+        super(MenuItemsEnum.DESERT, 0.400, 6.45, true);
     }
 
     @Override

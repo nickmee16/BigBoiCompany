@@ -3,26 +3,26 @@ package com.np.BigBoiCompany.Restaurant.Menu;
 import com.np.BigBoiCompany.Restaurant.Menu.Items.*;
 import com.np.BigBoiCompany.Restaurant.Menu.Items.Base.Items;
 
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class Menu {
 
-    private ArrayList<Items> items;
     private HashMap<MenuItemsEnum, Items> itemsMap;
 
 
     public Menu() {
-        this.items = new ArrayList<>();
         this.itemsMap = new HashMap<>();
         populateItemsMap();
     }
 
     public void printMenu() {
-        for (Integer i = 1; i <= itemsMap.size(); i++) {
-            System.out.print(i + " ");
-            itemsMap.get(i).getInfoItem();
+        System.out.println("---------------------------------");
+        for (Map.Entry<MenuItemsEnum, Items> item : itemsMap.entrySet()) {
+            item.getValue().getInfoItem();
+            System.out.println();
         }
+        System.out.println("---------------------------------");
     }
 
     private void populateItemsMap() {
@@ -33,7 +33,10 @@ public class Menu {
         itemsMap.put(MenuItemsEnum.JUICE, new Juice());
         itemsMap.put(MenuItemsEnum.NON_ALCOHOLIC, new NonAlcoholic());
         itemsMap.put(MenuItemsEnum.ALCOHOL, new Alcoholic());
+    }
 
+    public Items getItem(MenuItemsEnum item) {
+        return itemsMap.get(item);
     }
 
     public double getPriceForItem(MenuItemsEnum item) {
@@ -42,13 +45,6 @@ public class Menu {
 
     public void getOrderInfo(MenuItemsEnum item) {
         itemsMap.get(item).getInfoItem();
-    }
-
-    public String kitchenOrder(MenuItemsEnum item) {
-        if(itemsMap.get(item).isFood()) {
-            return itemsMap.get(item).getName();
-        }
-        return "";
     }
 
 }

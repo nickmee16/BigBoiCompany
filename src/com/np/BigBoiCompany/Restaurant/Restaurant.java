@@ -46,7 +46,9 @@ public class Restaurant implements IProfitable {
     }
 
     public void makeAnOrder(ArrayList<MenuItemsEnum> orderedItems) {
-        hall.makeAnOrder(orderedItems);
+        for(MenuItemsEnum item : orderedItems) {
+            hall.orderItem(item);
+        }
     }
 
     public void checkIfKitchenIsClean() {
