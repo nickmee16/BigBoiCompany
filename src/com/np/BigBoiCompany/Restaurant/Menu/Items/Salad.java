@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 
 public class Salad extends Items {
     public Salad() {
-        super(MenuItemsEnum.SALAD, 0.600, 7.15, true);
+        super(MenuItemsEnum.SALAD, 0.600, 7.15, true, 4.99, false);
     }
 
     @Override
@@ -15,6 +15,6 @@ public class Salad extends Items {
         DecimalFormat df = new DecimalFormat("0.00");
         DecimalFormat qu = new DecimalFormat("0.000");
 
-        System.out.println(name + " - " + qu.format(quantity) + " kg - " + df.format(price) + "$");
+        System.out.println(getName() + " - " + qu.format(getQuantityOfAProduct()) + " kg - " + df.format(getPrice()) + "$");
     }
 }

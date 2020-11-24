@@ -9,13 +9,13 @@ import java.text.DecimalFormat;
 
 public class Alcoholic extends Items {
     public Alcoholic() {
-        super(MenuItemsEnum.ALCOHOL, 0.050, 7.50 , false);
+        super(MenuItemsEnum.ALCOHOL, 0.050, 7.50 , false, 5.00, true);
     }
 
     @Override
     public void getInfoItem() {
         DecimalFormat qu = new DecimalFormat("0.000");
 
-        System.out.println(name + " - " + qu.format(quantity) + " ml - " + Utility.formatNumber(price) + "$");
+        System.out.println(getName() + " - " + qu.format(getQuantityOfAProduct()) + " ml - " + Utility.formatNumber(getPrice()) + "$");
     }
 }

@@ -8,7 +8,7 @@ import java.text.DecimalFormat;
 
 public class Juice extends Items {
     public Juice() {
-        super(MenuItemsEnum.JUICE, 0.330, 2.50, false);
+        super(MenuItemsEnum.JUICE, 0.330, 2.50, false, 1.09, true);
     }
 
     @Override
@@ -16,6 +16,6 @@ public class Juice extends Items {
         DecimalFormat df = new DecimalFormat("0.00");
         DecimalFormat qu = new DecimalFormat("0.000");
 
-        System.out.println(name + " - " + qu.format(quantity) + " ml - " + df.format(price) + "$");
+        System.out.println(getName() + " - " + qu.format(getQuantityOfAProduct()) + " ml - " + df.format(getPrice()) + "$");
     }
 }

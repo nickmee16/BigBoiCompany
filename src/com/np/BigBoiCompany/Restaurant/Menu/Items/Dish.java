@@ -7,7 +7,7 @@ import java.text.DecimalFormat;
 
 public class Dish extends Items {
     public Dish() {
-        super(MenuItemsEnum.DISH, 0.550, 10.30, true);
+        super(MenuItemsEnum.DISH, 0.550, 10.30, true, 6.50, false);
     }
 
     @Override
@@ -15,6 +15,6 @@ public class Dish extends Items {
         DecimalFormat df = new DecimalFormat("0.00");
         DecimalFormat qu = new DecimalFormat("0.000");
 
-        System.out.println(name + " - " + qu.format(quantity) + " kg - " + df.format(price) + "$");
+        System.out.println(getName() + " - " + qu.format(getQuantityOfAProduct()) + " kg - " + df.format(getPrice()) + "$");
     }
 }

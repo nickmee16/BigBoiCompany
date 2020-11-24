@@ -19,7 +19,7 @@ public class BigBoiCompany {
     public BigBoiCompany() {
         this.skiResort = new SkiResort("Ski");
         this.beachResort = new BeachResort("Bitch");
-        this.restaurant = new Restaurant("Rest");
+        this.restaurant = new Restaurant("Rest", 100);
 
 
         populateAvailableHotels();
