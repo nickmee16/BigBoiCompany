@@ -1,6 +1,7 @@
 package com.np.BigBoiCompany.Restaurant;
 
 import com.np.BigBoiCompany.IProfitable;
+import com.np.BigBoiCompany.Restaurant.Bar.Bar;
 import com.np.BigBoiCompany.Restaurant.DinningHall.DinningHall;
 import com.np.BigBoiCompany.Restaurant.Kitchen.Kitchen;
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
@@ -9,7 +10,7 @@ import com.np.BigBoiCompany.Utility;
 
 
 public class Restaurant implements IProfitable {
-
+    private Bar bar;
     private String name;
     private DinningHall hall;
     private Menu menu;
@@ -18,11 +19,12 @@ public class Restaurant implements IProfitable {
     private double loses;
 
     public Restaurant(String name, double availableMoney) {
+        this.bar = new Bar();
         this.name = name;
         this.availableMoney = availableMoney;
         this.loses = 0;
         this.menu = new Menu();
-        this.hall = new DinningHall(42, menu);
+        this.hall = new DinningHall(42, this.menu, this.bar);
         this.kitchen = new Kitchen(hall);
     }
 

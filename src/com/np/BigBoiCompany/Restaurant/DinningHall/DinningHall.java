@@ -1,5 +1,6 @@
 package com.np.BigBoiCompany.Restaurant.DinningHall;
 
+import com.np.BigBoiCompany.Restaurant.Bar.Bar;
 import com.np.BigBoiCompany.Restaurant.DinningHall.Order.Order;
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
 import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
@@ -13,15 +14,17 @@ public class DinningHall {
 
     private int tables;
     private final Menu menu;
+    private final Bar bar;
     private int tablesLimit = 25;
     private double profit = 0;
-    private final ArrayList<Integer> tableCounter = new ArrayList<>();
+    private final ArrayList<Integer> availableTables = new ArrayList<>();
     private final ArrayList<Order> itemsForKitchen = new ArrayList<>();
-    private final ArrayList<Order> itemsForBar = new ArrayList<>();
     private final HashMap<Integer, ArrayList<Order>> tableOrders = new HashMap<>();
 
 
-    public DinningHall(int tables, Menu menu) {
+
+    public DinningHall(int tables, Menu menu, Bar bar) {
+        this.bar = bar;
         this.tables = tables;
         this.menu = menu;
         setTables(tables);
@@ -35,6 +38,10 @@ public class DinningHall {
     public ArrayList<Order> getItemsForKitchen() {
         return itemsForKitchen;
     }
+
+//    public ArrayList<Order> getItemsForBar() {
+//        return itemsForBar;
+//    }
 
     private void setTables(int tables) {
         if (tables <= 0) {
@@ -50,36 +57,36 @@ public class DinningHall {
 
     private void populateTables() {
         for (int i = 0; i < tables; i++) {
-            tableCounter.add(i + 1);
+            availableTables.add(i + 1);
         }
     }
 
     public void availableTables() {
-        System.out.println("Available tables - " + tableCounter.size());
+        System.out.println("Available tables - " + availableTables.size());
     }
 
     public void takeTable(int table) {
 
-        if(!tableCounter.contains(table)) {
+        if(!availableTables.contains(table)) {
             System.out.println("Wrong table number or already taken");
 
         } else {
             tableOrders.put(table, new ArrayList<>());
             System.out.println("Your table is over there");
-            tableCounter.remove(Integer.valueOf(table));
+            availableTables.remove(Integer.valueOf(table));
 
         }
     }
 
     public void freeTable(int table) {
-        if(tableCounter.contains(table)) {
+        if(availableTables.contains(table)) {
             System.out.println("Wrong table number or already free");
 
         } else {
             System.out.println("Comeback again");
             tableOrders.remove(table);
-            tableCounter.add(table);
-            Collections.sort(tableCounter);
+            availableTables.add(table);
+            Collections.sort(availableTables);
 
         }
     }
@@ -90,7 +97,7 @@ public class DinningHall {
 
     public void orderItem(int table, MenuItemsEnum item, int quantity) {
 
-        if(tableCounter.contains(table)) {
+        if(availableTables.contains(table)) {
             System.out.println("Wrong table number");
 
         } else if (quantity <= 0) {
@@ -114,14 +121,14 @@ public class DinningHall {
                 fixOrder(itemsForKitchen, item, quantity);
 
             } else {
-                fixOrder(itemsForBar, item, quantity);
+                fixOrder(bar.getItems(), item, quantity);
             }
         }
     }
 
     public void returnOrder(int table, MenuItemsEnum item, int quantity) {
 
-        if(tableCounter.contains(table)) {
+        if(availableTables.contains(table)) {
             System.out.println("Wrong table number");
         } else if(!menu.canBeReturned(item)) {
             System.out.println(item + " can not be returned");
@@ -149,7 +156,7 @@ public class DinningHall {
     }
 
     public void checkBill(int table) {
-        if(tableCounter.contains(table)) {
+        if(availableTables.contains(table)) {
             System.out.println("Wrong table number");
         } else {
             double price = 0;
@@ -191,3 +198,12 @@ public class DinningHall {
     }
 
 }
+
+/*
+horata sqdat -> suzdavash masa
+horatata poruchvat pepsi
+otivash do bara i mu kazvash trqbva mi pepsi
+bara proverqva koq mu e nai starata poruchka i da q izpulni
+za vsqka poruchka koqto izpulni, trqbva da se updatene produkta na masata che e gotov
+
+ */
