@@ -7,13 +7,13 @@ import com.np.BigBoiCompany.Utility;
 
 public class SkiVolkl extends Ski {
     public SkiVolkl() {
-        super(SkiBrands.VOLKL, 4.30, SkiSizeTypes.VERY_LONG);
+        super(SkiBrands.VOLKL, 4.30, 230, 30, SkiSizeTypes.VERY_LONG);
     }
 
     @Override
     public void getInfoSki() {
 
         System.out.println(getBrand() + " ski - " + getLength() + "cm - "
-                + Utility.formatNumber(getRentPricePerHour()) + "$ per hour");
+                + Utility.formatNumber(getRentPricePerDay()) + "$ per hour");
     }
 }

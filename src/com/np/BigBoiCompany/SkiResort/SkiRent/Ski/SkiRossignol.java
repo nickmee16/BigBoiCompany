@@ -7,13 +7,13 @@ import com.np.BigBoiCompany.Utility;
 
 public class SkiRossignol extends Ski {
     public SkiRossignol() {
-        super(SkiBrands.ROSSIGNOL, 5.00, SkiSizeTypes.MEDIUM);
+        super(SkiBrands.ROSSIGNOL, 5.00, 235, 35, SkiSizeTypes.MEDIUM);
     }
 
     @Override
     public void getInfoSki() {
 
         System.out.println(getBrand() + " ski - " + getLength() + "cm - "
-                + Utility.formatNumber(getRentPricePerHour()) + "$ per hour");
+                + Utility.formatNumber(getRentPricePerDay()) + "$ per hour");
     }
 }

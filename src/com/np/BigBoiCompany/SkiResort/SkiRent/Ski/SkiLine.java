@@ -7,13 +7,13 @@ import com.np.BigBoiCompany.Utility;
 
 public class SkiLine extends Ski {
     public SkiLine() {
-        super(SkiBrands.LINE, 4.75, SkiSizeTypes.SMALL);
+        super(SkiBrands.LINE, 4.75, 240, 40, SkiSizeTypes.SMALL);
     }
 
     @Override
     public void getInfoSki() {
 
         System.out.println(getBrand() + " ski - " + getLength() + "cm - "
-                + Utility.formatNumber(getRentPricePerHour()) + "$ per hour");
+                + Utility.formatNumber(getRentPricePerDay()) + "$ per hour");
     }
 }

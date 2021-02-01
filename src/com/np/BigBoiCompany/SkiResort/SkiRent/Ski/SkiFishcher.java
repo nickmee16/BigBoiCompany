@@ -7,13 +7,13 @@ import com.np.BigBoiCompany.Utility;
 
 public class SkiFishcher extends Ski {
     public SkiFishcher() {
-        super(SkiBrands.FISCHER, 4.60, SkiSizeTypes.VERY_SMALL);
+        super(SkiBrands.FISCHER, 4.60, 250, 50, SkiSizeTypes.VERY_SMALL);
     }
 
     @Override
     public void getInfoSki() {
 
         System.out.println(getBrand() + " ski - " + getLength() + "cm - "
-                + Utility.formatNumber(getRentPricePerHour()) + "$ per hour");
+                + Utility.formatNumber(getRentPricePerDay()) + "$ per hour");
     }
 }

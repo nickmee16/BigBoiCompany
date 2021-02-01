@@ -7,13 +7,13 @@ import com.np.BigBoiCompany.Utility;
 
 public class SkiK2 extends Ski {
     public SkiK2() {
-        super(SkiBrands.K2, 5.50, SkiSizeTypes.LONG);
+        super(SkiBrands.K2, 5.50, 245, 45, SkiSizeTypes.LONG);
     }
 
     @Override
     public void getInfoSki() {
 
         System.out.println(getBrand() + " ski - " + getLength() + "cm - "
-                + Utility.formatNumber(getRentPricePerHour()) + "$ per hour");
+                + Utility.formatNumber(getRentPricePerDay()) + "$ per hour");
     }
 }

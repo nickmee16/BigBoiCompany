@@ -61,8 +61,7 @@ public class SkiRent {
         System.out.println();
     }
 
-//    refactor to boolean
-    public void rentSki(SkiSizeTypes skiLength, int rentHours) {
+    public void rentSki(SkiSizeTypes skiLength) {
         SkiSizeTypes localType = SkiSizeTypes.NONE;
         double skiProfit = 0;
 
@@ -72,7 +71,7 @@ public class SkiRent {
 
                 System.out.println("You rented:");
                 localSki.getInfoSki();
-                skiProfit = localSki.getRentPricePerHour();
+                skiProfit = localSki.getRentPricePerDay();
                 localType = localSki.getLength();
                 break;
             }
@@ -82,13 +81,11 @@ public class SkiRent {
             System.out.println("There are no ski with length " + skiLength.getValue() +
                     "\n" + "Please insert correct ski length");
         } else {
-            System.out.println("Price: " + Utility.formatNumber(skiProfit * rentHours) + "$");
-            profit = profit + (skiProfit * rentHours);
+            System.out.println("Price: " + Utility.formatNumber(skiProfit) + "$");
+            profit = profit + (skiProfit);
             System.out.println();
         }
     }
-
-    //    refactor to boolean
 
     public void rentShoes(int shoeSize, int rentHours) {
         double shoeProfit = 0;
@@ -116,7 +113,7 @@ public class SkiRent {
     }
 
     public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize, int rentHours) {
-        rentSki(skiLength, rentHours);
+        rentSki(skiLength);
         rentShoes(shoeSize, rentHours);
     }
 

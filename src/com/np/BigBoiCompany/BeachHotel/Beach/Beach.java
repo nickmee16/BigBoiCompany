@@ -29,8 +29,6 @@ public class Beach {
 
     private void populateChair() {
         for (int y = 0; y < 15; y++) {
-//            availableChairs.add(new LeatherChair());
-//            availableChairs.add(new WoodenChair());
             countL++;
             countW++;
         }
