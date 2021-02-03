@@ -14,6 +14,6 @@ public class ShoeRossignol extends SkiShoes {
     @Override
     public void getInfoShoe() {
 
-        System.out.println(getBrand() + " shoes - size: 36 - 45 - " + Utility.formatNumber(getRentPricePerHour()) + "$ per hour");
+        System.out.println(getBrand() + " shoes - size: 36 - 45 - " + Utility.formatNumber(getRentPricePerDay()) + "$ per hour");
     }
 }

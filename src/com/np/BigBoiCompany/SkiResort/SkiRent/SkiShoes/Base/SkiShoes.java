@@ -5,12 +5,12 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.SkiBrands;
 public abstract class SkiShoes {
 
     private SkiBrands brand;
-    private double rentPricePerHour;
+    private double rentPricePerDay;
     private int shoeSize;
 
-    public SkiShoes(SkiBrands brand, double rentPricePerHour, int shoeSize) {
+    public SkiShoes(SkiBrands brand, double rentPricePerDay, int shoeSize) {
         this.brand = brand;
-        this.rentPricePerHour = rentPricePerHour;
+        this.rentPricePerDay = rentPricePerDay;
         this.shoeSize = shoeSize;
     }
 
@@ -18,8 +18,8 @@ public abstract class SkiShoes {
         return brand;
     }
 
-    public double getRentPricePerHour() {
-        return rentPricePerHour;
+    public double getRentPricePerDay() {
+        return rentPricePerDay;
     }
 
     public int getShoeSize() {

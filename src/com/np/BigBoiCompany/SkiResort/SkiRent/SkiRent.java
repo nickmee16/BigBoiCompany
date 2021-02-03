@@ -87,7 +87,7 @@ public class SkiRent {
         }
     }
 
-    public void rentShoes(int shoeSize, int rentHours) {
+    public void rentShoes(int shoeSize) {
         double shoeProfit = 0;
 
         for (int i = 0; i < availableShoes.size(); i++) {
@@ -95,7 +95,7 @@ public class SkiRent {
                 SkiShoes localShoes = availableShoes.get(i);
 
                 localShoes.getInfoShoe();
-                shoeProfit = localShoes.getRentPricePerHour();
+                shoeProfit = localShoes.getRentPricePerDay();
                 takenShoes.add(localShoes);
                 availableShoes.remove(i);
                 break;
@@ -106,15 +106,15 @@ public class SkiRent {
             System.out.println("There are no shoes " + shoeSize + " size" +
                     "\n" + "Please insert correct size");
         } else {
-            System.out.println("Price: " + Utility.formatNumber(shoeProfit * rentHours) + "$");
-            profit = profit + (shoeProfit * rentHours);
+            System.out.println("Price: " + Utility.formatNumber(shoeProfit) + "$");
+            profit = profit + (shoeProfit);
         }
         System.out.println();
     }
 
-    public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize, int rentHours) {
+    public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize) {
         rentSki(skiLength);
-        rentShoes(shoeSize, rentHours);
+        rentShoes(shoeSize);
     }
 
     public void returnSki(SkiSizeTypes skiLength) {

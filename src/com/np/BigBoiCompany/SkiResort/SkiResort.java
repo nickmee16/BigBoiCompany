@@ -39,16 +39,16 @@ public class SkiResort implements IProfitable {
         return hotel;
     }
 
-    public void rentSki(SkiSizeTypes skiLength, int rentHours) {
-        skiRent.rentSki(skiLength, rentHours);
+    public void rentSki(SkiSizeTypes skiLength) {
+        skiRent.rentSki(skiLength);
     }
 
-    public void rentShoes(int shoeSize, int rentHours) {
-        skiRent.rentShoes(shoeSize, rentHours);
+    public void rentShoes(int shoeSize) {
+        skiRent.rentShoes(shoeSize);
     }
 
-    public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize, int rentHours) {
-        skiRent.rentSkiAndShoes(skiLength, shoeSize, rentHours);
+    public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize) {
+        skiRent.rentSkiAndShoes(skiLength, shoeSize);
     }
 
     public void returnSki(SkiSizeTypes skiLength) {
