@@ -42,12 +42,13 @@ public class Main {
 //        restaurant.freeTable(19);
 
 
-        bigBoiCompany.hireEmployee("Nikosadas.2/ *mdsak", "0123456789", 213.32);
-        bigBoiCompany.hireEmployee("Nikolay Petrov", "01234561789", 213.32);
-        bigBoiCompany.hireEmployee("Nikolay Petrov", "01d4561789", 213.32);
-        bigBoiCompany.hireEmployee("Nikolay Petrov", "014561789", 213.32);
-        bigBoiCompany.hireEmployee("Nikolay Petrov", "0134561789", 213.32);
-        bigBoiCompany.hireEmployee("Nikolay Petrov", "0134561789", 213.32);
-        bigBoiCompany.hireEmployee("Random Randomov", "0134361789", 213.32);
+//        bigBoiCompany.hireEmployee("Nikosadas.2/ *mdsak", "0123456789", 213.32);
+//        bigBoiCompany.hireEmployee("Nikolay Petrov", "01234561789", 213.32);
+//        bigBoiCompany.hireEmployee("Nikolay Petrov", "01d4561789", 213.32);
+//        bigBoiCompany.hireEmployee("Nikolay Petrov", "014561789", 213.32);
+//        bigBoiCompany.hireEmployee("Nikolay Petrov", "0134561789", 213.32);
+//        bigBoiCompany.hireEmployee("Nikolay Petrov", "0134561789", 213.32);
+//        bigBoiCompany.hireEmployee("Random Randomov", "0134361789", 213.32);
+//        bigBoiCompany.hireEmployee("Gele Zele - Shefkata", "0126598765", 1000);
     }
 }

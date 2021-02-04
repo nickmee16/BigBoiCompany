@@ -30,6 +30,30 @@ public class BigBoiCompany {
         populateAvailableHotels();
         populateAssets();
 
+        // should not hardcode creation of the beach resort, restaurant and ski resort
+    }
+
+    public void setSkiResort(SkiResort skiResort) {
+        this.skiResort = skiResort;
+    }
+
+    public void setBeachResort(BeachResort beachResort) {
+        this.beachResort = beachResort;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public BigBoiCompany(SkiResort skiResort, BeachResort beachResort, Restaurant restaurant) {
+        this.skiResort = skiResort;
+        this.beachResort = beachResort;
+        this.restaurant = restaurant;
+
+
+
+        populateAssets();
+        populateAvailableHotels();
     }
 
     private void populateAssets() {
@@ -72,10 +96,10 @@ public class BigBoiCompany {
         availableHotels.get(hotel).returnKeys(apartmentNumber);
     }
 
-    public void hireEmployee(String name, String EGN, double salary) {
+    public void hireEmployee(Employee employee) {
         boolean notExist = true;
-        for(int i = 0; i < employees.size(); i++) {
-            if(employees.get(i).getEGN().equals(EGN)) {
+        for(Person e : employees) {
+            if(e.getEGN().equals(employee.getEGN())) {
                 notExist = false;
                 break;
             }
@@ -84,15 +108,11 @@ public class BigBoiCompany {
         if(!notExist) {
             System.out.println("This EGN is already in the system");
 
-        } else if(!checkNameEGN(name, EGN)) {
+        } else if(!checkNameEGN(employee.getName(), employee.getEGN())) {
 
         } else {
-            Person emp = new Employee(name, EGN, salary);
-            employees.add(emp);
-            System.out.println("New employee" + "\n"
-                    + "name: " + emp.getName() + "\n"
-                    + "EGN: " + emp.getEGN() + "\n"
-                    + "salary: " + emp.getSalary() + "\n");
+            employees.add(employee);
+            System.out.println("New employee: " + employee);
         }
     }
 
