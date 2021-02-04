@@ -1,5 +1,7 @@
 package com.np.BigBoiCompany.Person.Base;
 
+import java.util.Objects;
+
 public class Person {
 
     private PersonType personType;
@@ -71,5 +73,25 @@ public class Person {
 
     public void setTab(double tab) {
         this.tab = tab;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "personType=" + personType +
+                ", name='" + name + '\'' +
+                ", EGN='" + EGN + '\'' +
+                ", discount=" + discount +
+                ", salary=" + salary +
+                ", tab=" + tab +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return Objects.equals(name, person.name) && Objects.equals(EGN, person.EGN);
     }
 }

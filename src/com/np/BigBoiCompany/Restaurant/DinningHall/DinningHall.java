@@ -1,5 +1,10 @@
 package com.np.BigBoiCompany.Restaurant.DinningHall;
 
+import com.np.BigBoiCompany.Person.Base.Person;
+import com.np.BigBoiCompany.Person.Base.PersonType;
+import com.np.BigBoiCompany.Person.Customer;
+import com.np.BigBoiCompany.Person.Employee;
+import com.np.BigBoiCompany.Person.Guest;
 import com.np.BigBoiCompany.Restaurant.Bar.Bar;
 import com.np.BigBoiCompany.Restaurant.DinningHall.Order.Order;
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
@@ -160,27 +165,36 @@ public class DinningHall {
         }
     }
 
-    public void pay(int table) {
+    public void pay(int table, Person person) {
         if(availableTables.contains(table)) {
             System.out.println("Wrong table number or already free");
-        } else {
-
-            profit += price(table);
-
-            tableOrders.remove(table);
-            availableTables.add(table);
-            Collections.sort(availableTables);
-
-            System.out.println("Welcome back! :)");
+            return;
         }
+
+        double bill = price(table);
+        System.out.println("Your bill is: " + bill);
+        if (person.getDiscount() != 0){
+            bill -= bill * person.getDiscount() / 100;
+            System.out.println("Your bill with discount is: " + bill);
+        }
+        profit += bill;
+        tableOrders.remove(table);
+        availableTables.add(table);
+        Collections.sort(availableTables);
+
+        System.out.println("Come again! :)");
     }
 
     private double price(int table) {
         double price = 0;
 
-        for(int i = 0; i < tableOrders.get(table).size(); i++) {
-            price += tableOrders.get(table).get(i).getMoney();
+        for(Order order: tableOrders.get(table)) {
+            price += order.getMoney();
         }
+
+//        for(int i = 0; i < tableOrders.get(table).size(); i++) {
+//            price += tableOrders.get(table).get(i).getMoney();
+//        }
 
         return price;
     }

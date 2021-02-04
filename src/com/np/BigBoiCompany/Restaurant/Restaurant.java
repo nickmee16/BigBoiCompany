@@ -1,6 +1,10 @@
 package com.np.BigBoiCompany.Restaurant;
 
 import com.np.BigBoiCompany.IProfitable;
+import com.np.BigBoiCompany.Person.Base.Person;
+import com.np.BigBoiCompany.Person.Customer;
+import com.np.BigBoiCompany.Person.Employee;
+import com.np.BigBoiCompany.Person.Guest;
 import com.np.BigBoiCompany.Restaurant.Bar.Bar;
 import com.np.BigBoiCompany.Restaurant.DinningHall.DinningHall;
 import com.np.BigBoiCompany.Restaurant.Kitchen.Kitchen;
@@ -16,13 +20,13 @@ public class Restaurant implements IProfitable {
     private Menu menu;
     private Kitchen kitchen;
     private double availableMoney;
-    private double loses;
+    private double losses;
 
     public Restaurant(String name, double availableMoney) {
         this.bar = new Bar();
         this.name = name;
         this.availableMoney = availableMoney;
-        this.loses = 0;
+        this.losses = 0;
         this.menu = new Menu();
         this.hall = new DinningHall(42, this.menu, this.bar);
         this.kitchen = new Kitchen(hall);
@@ -30,11 +34,11 @@ public class Restaurant implements IProfitable {
 
     @Override
     public double getProfit() {
-        return hall.getProfit() - loses;
+        return hall.getProfit() - losses;
     }
 
     public void checkProfit() {
-        System.out.println("The profit of Restaurant " + name + " is " + Utility.formatNumber(hall.getProfit() - loses) + "$");
+        System.out.println("The profit of Restaurant " + name + " is " + Utility.formatNumber(hall.getProfit() - losses) + "$");
     }
 
     public void availableTables() {
@@ -45,8 +49,8 @@ public class Restaurant implements IProfitable {
         hall.takeTable(table);
     }
 
-    public void pay(int table) {
-        hall.pay(table);
+    public void pay(int table, Person person) {
+        hall.pay(table, person);
     }
 
     public void printMenu() {
@@ -79,7 +83,7 @@ public class Restaurant implements IProfitable {
             + "Required: " + Utility.formatNumber(menu.getPriceOfAProduct(item) * quantity) + "$");
 
         } else {
-            loses = menu.getPriceOfAProduct(item) * quantity;
+            losses = menu.getPriceOfAProduct(item) * quantity;
             availableMoney = hall.getProfit() + availableMoney - menu.getPriceOfAProduct(item) * quantity;
             menu.changeTheValueOfAvailable(item, quantity);
             System.out.println("Product ordered: " + item + " * " + quantity + ". Price: " + Utility.formatNumber(menu.getPriceOfAProduct(item) * quantity) + "$");
