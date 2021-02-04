@@ -15,7 +15,6 @@ public class DinningHall {
     private int tables;
     private final Menu menu;
     private final Bar bar;
-    private int tablesLimit = 25;
     private double profit = 0;
     private final ArrayList<Integer> availableTables = new ArrayList<>();
     private final ArrayList<Order> itemsForKitchen = new ArrayList<>();
@@ -44,6 +43,7 @@ public class DinningHall {
 //    }
 
     private void setTables(int tables) {
+        int tablesLimit = 25;
         if (tables <= 0) {
             this.tables = 1;
 
@@ -78,19 +78,6 @@ public class DinningHall {
         }
     }
 
-    public void freeTable(int table) {
-        if(availableTables.contains(table)) {
-            System.out.println("Wrong table number or already free");
-
-        } else {
-            System.out.println("Comeback again");
-            tableOrders.remove(table);
-            availableTables.add(table);
-            Collections.sort(availableTables);
-
-        }
-    }
-
     public void printMenu() {
         menu.printMenu();
     }
@@ -115,7 +102,6 @@ public class DinningHall {
 
 
             menu.changeTheValueOfAvailable(item, -1 * quantity);
-            profit += menu.getItem(item).getPrice() * quantity;
 
             if (menu.getItem(item).isFood()) {
                 fixOrder(itemsForKitchen, item, quantity);
@@ -130,12 +116,11 @@ public class DinningHall {
 
         if(availableTables.contains(table)) {
             System.out.println("Wrong table number");
+
         } else if(!menu.canBeReturned(item)) {
             System.out.println(item + " can not be returned");
 
         } else {
-
-            profit -= menu.getItem(item).getPrice() * quantity;
 
             for (int i = 0; i < tableOrders.get(table).size(); i++) {
 
@@ -143,6 +128,7 @@ public class DinningHall {
                     if (tableOrders.get(table).get(i).getQuantity() <= quantity) {
                         tableOrders.get(table).remove(i);
                         System.out.println("Order " + item + " was returned");
+
                     } else {
                         tableOrders.get(table).get(i).setQuantity(tableOrders.get(table).get(i).getQuantity() - quantity);
                         tableOrders.get(table).get(i).setMoney(tableOrders.get(table).get(i).getMoney() -menu.getItem(item).getPrice() * quantity);
@@ -156,10 +142,11 @@ public class DinningHall {
     }
 
     public void checkBill(int table) {
+
         if(availableTables.contains(table)) {
             System.out.println("Wrong table number");
+
         } else {
-            double price = 0;
 
             for(int i = 0; i < tableOrders.get(table).size(); i++) {
                 System.out.print(tableOrders.get(table).get(i).getItem() + " ");
@@ -167,11 +154,35 @@ public class DinningHall {
                 System.out.print(Utility.formatNumber(tableOrders.get(table).get(i).getMoney()) + "$");
                 System.out.println();
 
-                price += tableOrders.get(table).get(i).getMoney();
             }
 
-            System.out.println("Total: " + Utility.formatNumber(price) + "$");
+            System.out.println("Total: " + Utility.formatNumber(price(table)) + "$");
         }
+    }
+
+    public void pay(int table) {
+        if(availableTables.contains(table)) {
+            System.out.println("Wrong table number or already free");
+        } else {
+
+            profit += price(table);
+
+            tableOrders.remove(table);
+            availableTables.add(table);
+            Collections.sort(availableTables);
+
+            System.out.println("Welcome back! :)");
+        }
+    }
+
+    private double price(int table) {
+        double price = 0;
+
+        for(int i = 0; i < tableOrders.get(table).size(); i++) {
+            price += tableOrders.get(table).get(i).getMoney();
+        }
+
+        return price;
     }
 
     private void fixOrder(ArrayList<Order> order, MenuItemsEnum item, int quantity) {
@@ -198,12 +209,3 @@ public class DinningHall {
     }
 
 }
-
-/*
-horata sqdat -> suzdavash masa
-horatata poruchvat pepsi
-otivash do bara i mu kazvash trqbva mi pepsi
-bara proverqva koq mu e nai starata poruchka i da q izpulni
-za vsqka poruchka koqto izpulni, trqbva da se updatene produkta na masata che e gotov
-
- */

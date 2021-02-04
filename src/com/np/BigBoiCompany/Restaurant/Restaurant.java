@@ -45,8 +45,8 @@ public class Restaurant implements IProfitable {
         hall.takeTable(table);
     }
 
-    public void freeTable(int table) {
-        hall.freeTable(table);
+    public void pay(int table) {
+        hall.pay(table);
     }
 
     public void printMenu() {
