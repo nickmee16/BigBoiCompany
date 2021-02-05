@@ -8,24 +8,29 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeRossignol;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeLine;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.*;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
+import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.*;
+import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.Slope;
+import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.SlopeType;
 import com.np.BigBoiCompany.Utility;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SkiRent {
 
     private double profit = 0;
     private ArrayList<Ski> availableSkis = new ArrayList<>();
-    private ArrayList<SkiShoes> shoes = new ArrayList<>();
     private ArrayList<SkiShoes> availableShoes = new ArrayList<>();
     private ArrayList<SkiShoes> takenShoes = new ArrayList<>();
     private ArrayList<SkiInfo> skiNew = new ArrayList<>();
     private ArrayList<SkiInfo> skiNewTaken = new ArrayList<>();
+    private ArrayList<Slope> slopes = new ArrayList<>();
 
 
     public SkiRent() {
-        populateSki();
+//        populateSki();
 //        populateSkiShoes();
+        populateSlopes();
     }
 
 //    private void populateSkiShoes() {
@@ -41,19 +46,24 @@ public class SkiRent {
 //        }
 //    }
 
-    private void populateSki() {
-        Ski ski1 = new SkiK2();
-        Ski ski2 = new SkiRossignol();
-        Ski ski3 = new SkiLine();
-        Ski ski4 = new SkiFishcher();
-        Ski ski5 = new SkiVolkl();
-        availableSkis.add(ski1);
-        availableSkis.add(ski2);
-        availableSkis.add(ski3);
-        availableSkis.add(ski4);
-        availableSkis.add(ski5);
+//    private void populateSki() {
+//        Ski ski1 = new SkiK2();
+//        Ski ski2 = new SkiRossignol();
+//        Ski ski3 = new SkiLine();
+//        Ski ski4 = new SkiFishcher();
+//        Ski ski5 = new SkiVolkl();
+//        availableSkis.add(ski1);
+//        availableSkis.add(ski2);
+//        availableSkis.add(ski3);
+//        availableSkis.add(ski4);
+//        availableSkis.add(ski5);
+//
+//    }
 
-    }
+
+    /*
+    come back when you add budget
+    */
 
     public void buySki(SkiSizeTypes skiLength, int numberOfPairs) {
         SkiInfo ski;
@@ -109,6 +119,21 @@ public class SkiRent {
 
     }
 
+    public void populateSlopes() {
+        Slope e1 = new E1();
+        Slope e2 = new E2();
+        Slope m1 = new M1();
+        Slope m2 = new M2();
+        Slope h1 = new H1();
+        Slope h2 = new H2();
+        slopes.add(e1);
+        slopes.add(e2);
+        slopes.add(m1);
+        slopes.add(m2);
+        slopes.add(h1);
+        slopes.add(h2);
+    }
+
     public double getProfit() {
         return profit;
     }
@@ -118,6 +143,10 @@ public class SkiRent {
         System.out.println();
     }
 
+
+    /*
+    Add person here
+     */
     public void rentSki(SkiSizeTypes skiLength) {
         SkiInfo ski = null;
 
@@ -168,6 +197,9 @@ public class SkiRent {
 //        }
 //    }
 
+    /*
+    Add person here
+     */
     public void rentShoes(int shoeSize) {
         double shoeProfit = 0;
 
@@ -193,11 +225,51 @@ public class SkiRent {
         System.out.println();
     }
 
+    /*
+    Add person here
+     */
     public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize) {
         rentSki(skiLength);
         rentShoes(shoeSize);
     }
 
+    /*
+      Add person here
+      add discount for more slopes
+      */
+
+
+    public void rentPassForSlope1(SlopeType... slope) {
+        ArrayList<SlopeType> slopeAL = new ArrayList<>(Arrays.asList(slope));
+
+        for(int i = 0; i < slopeAL.size() - 1; i++) {
+
+            for(int y = i + 1; y < slopeAL.size(); y++) {
+
+                if(slopeAL.get(i) == slopeAL.get(y)) {
+                    slopeAL.remove(y);
+                    y--;
+                }
+            }
+        }
+
+        double price = 0;
+        for(int i = 0; i < slopeAL.size(); i++) {
+            price += slopeAL.get(i).getPrice();
+
+            for(int y = 0; y < slopes.size(); y++) {
+                if(slopes.get(y).getSlopeType() == slopeAL.get(i)) {
+                    System.out.println(slopeAL.get(i) + " price:" + Utility.formatNumber(slopeAL.get(i).getPrice()) + "$");
+                }
+            }
+        }
+
+        System.out.println(Utility.formatNumber(price) + "$");
+    }
+
+    /*
+    Need to be changed by person ID
+     */
     public void returnSki(SkiSizeTypes skiLength) {
         int countSki = 0;
 
@@ -215,6 +287,9 @@ public class SkiRent {
         }
     }
 
+    /*
+  Need to be changed by person ID
+   */
     public void returnShoes(int shoeSize) {
         int countShoes = 0;
 
@@ -234,6 +309,9 @@ public class SkiRent {
         }
     }
 
+    /*
+  Need to be changed by person ID
+   */
     public void returnSkiAndShoes(SkiSizeTypes skiLength,  int shoeSize) {
         returnSki(skiLength);
         returnShoes(shoeSize);
