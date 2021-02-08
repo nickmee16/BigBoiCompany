@@ -5,6 +5,8 @@ import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.LeatherChair;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.WoodenChair;
 import com.np.BigBoiCompany.Utility;
+import com.np.BigBoiCompany.Person.Base.Person;
+
 
 public class Beach {
 
@@ -39,7 +41,7 @@ public class Beach {
         System.out.println(BeachChairEnum.WOODEN + " - " + countW);
     }
 
-    public void rentChair(BeachChairEnum beachChair, int rentHours, boolean isHotelUser) {
+    public void rentChair(BeachChairEnum beachChair, int rentHours, Person person) {
         BeachChair chair;
 
         switch (beachChair) {
@@ -74,13 +76,13 @@ public class Beach {
                 break;
         }
 
-        double price = isHotelUser ?
-                chair.getRentPricePerHourForHotelUsers() :
-                chair.getRentPricePerHourForNonHotelUsers();
+        double price = chair.getRentPricePerHour();
 
-        System.out.println("You rented:");
+        price -= price * person.getDiscount() / 100;
+
+        System.out.println("You have rented a");
         chair.getInfoChair();
-        System.out.println("Price: " + Utility.formatNumber(price * rentHours) + "$");
+        System.out.println("Price for " + person + " is " + Utility.formatNumber(price * rentHours) + "$");
         System.out.println();
         profit += price * rentHours;
     }

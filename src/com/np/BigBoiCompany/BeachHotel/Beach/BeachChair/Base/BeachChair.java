@@ -1,28 +1,29 @@
 package com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base;
 
+import com.np.BigBoiCompany.Utility;
+
 public abstract class BeachChair {
 
     private BeachChairEnum manufacture;
-    private double rentPricePerHourForHotelUsers;
-    private double rentPricePerHourForNonHotelUsers;
+    private double rentPricePerHour;
 
-    protected BeachChair(BeachChairEnum manufacture, double rentPricePerHourForHotelUsers, double rentPricePerHourForNonHotelUsers) {
+    protected BeachChair(BeachChairEnum manufacture, double rentPricePerHour) {
         this.manufacture = manufacture;
-        this.rentPricePerHourForHotelUsers = rentPricePerHourForHotelUsers;
-        this.rentPricePerHourForNonHotelUsers = rentPricePerHourForNonHotelUsers;
+        this.rentPricePerHour = rentPricePerHour;
     }
 
     public BeachChairEnum getManufacture() {
         return manufacture;
     }
 
-    public double getRentPricePerHourForHotelUsers() {
-        return rentPricePerHourForHotelUsers;
+    public double getRentPricePerHour() {
+        return rentPricePerHour;
     }
 
-    public double getRentPricePerHourForNonHotelUsers() {
-        return rentPricePerHourForNonHotelUsers;
+    public void getInfoChair() {
+
+        System.out.println(getManufacture() + " beach chair" +
+                "\n" + "It costs " + Utility.formatNumber(getRentPricePerHour()) + "$ per hour.");
     }
 
-    public abstract void getInfoChair();
 }

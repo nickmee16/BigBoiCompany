@@ -8,14 +8,7 @@ import com.np.BigBoiCompany.Utility;
 public class LeatherChair extends BeachChair {
 
     public LeatherChair() {
-        super(BeachChairEnum.LEATHER, 5.45, 7.55);
+        super(BeachChairEnum.LEATHER,  7.55);
     }
 
-    @Override
-    public void getInfoChair() {
-
-        System.out.println(getManufacture() + " BeachChair" +
-                "\n" + Utility.formatNumber(getRentPricePerHourForHotelUsers()) + "$ per hour - hotel guest" +
-                "\n" + Utility.formatNumber(getRentPricePerHourForNonHotelUsers()) + "$ per hour");
-    }
 }
