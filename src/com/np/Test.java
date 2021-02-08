@@ -40,7 +40,9 @@ public class Test {
 //        );
 
         SkiRent skiRent = new SkiRent();
-        skiRent.rentPassForSlope1(SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2, SlopeType.MEDIUM_2);
+        skiRent.rentPassForSlope(SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2, SlopeType.MEDIUM_2);
+        skiRent.rentPassForSlope(SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2, SlopeType.MEDIUM_2, SlopeType.HARD_1);
+        skiRent.rentPassForSlope(SlopeType.EASY_1);
 
     }
 }

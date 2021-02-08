@@ -239,7 +239,7 @@ public class SkiRent {
       */
 
 
-    public void rentPassForSlope1(SlopeType... slope) {
+    public void rentPassForSlope(SlopeType... slope) {
         ArrayList<SlopeType> slopeAL = new ArrayList<>(Arrays.asList(slope));
 
         for(int i = 0; i < slopeAL.size() - 1; i++) {
@@ -253,6 +253,12 @@ public class SkiRent {
             }
         }
 
+        int discount = 0;
+
+        if(slopeAL.size() > 1) {
+            discount = 5 * slopeAL.size();
+        }
+
         double price = 0;
         for(int i = 0; i < slopeAL.size(); i++) {
             price += slopeAL.get(i).getPrice();
@@ -263,8 +269,14 @@ public class SkiRent {
                 }
             }
         }
+        System.out.println(discount);
+        price = price *  ((double) (100 - discount) / 100);
 
-        System.out.println(Utility.formatNumber(price) + "$");
+        if(discount == 0) {
+            System.out.println("Total: " + Utility.formatNumber(price) + "$");
+        } else {
+            System.out.println("Total with discount for package of " + slopeAL.size() + " slopes: " + Utility.formatNumber(price) + "$");
+        }
     }
 
     /*
