@@ -172,10 +172,10 @@ public class DinningHall {
         }
 
         double bill = price(table);
-        System.out.println("Your bill is: " + bill);
+        System.out.println("Your bill is: " + Utility.formatNumber(bill) + "$");
         if (person.getDiscount() != 0){
             bill -= bill * person.getDiscount() / 100;
-            System.out.println("Your bill with discount is: " + bill);
+            System.out.println("Your bill with discount is: " + Utility.formatNumber(bill) + "$");
         }
         profit += bill;
         tableOrders.remove(table);

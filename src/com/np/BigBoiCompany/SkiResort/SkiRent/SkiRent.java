@@ -1,5 +1,6 @@
 package com.np.BigBoiCompany.SkiResort.SkiRent;
 
+import com.np.BigBoiCompany.Person.Base.Person;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiInfo;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base.SkiShoes;
@@ -143,31 +144,30 @@ public class SkiRent {
         System.out.println();
     }
 
+    public void rentSki(Ski ski, SkiSizeTypes skiLength, Person person) {
+        SkiInfo skiInfo = null;
 
-    /*
-    Add person here
-     */
-    public void rentSki(SkiSizeTypes skiLength) {
-        SkiInfo ski = null;
+        double skiPrice = ski.getRentPricePerDay();
+        skiPrice -= skiPrice * person.getDiscount() /100;
 
         for(int i = 0; i < skiNew.size(); i++) {
 
             if(skiNew.get(i).getSki().getLength() == skiLength) {
-                ski = skiNew.get(i);
+                skiInfo = skiNew.get(i);
                 skiNew.remove(i);
-                skiNewTaken.add(ski);
+                skiNewTaken.add(skiInfo);
                 break;
             }
         }
 
-        if(ski == null) {
+        if(skiInfo == null) {
             System.out.println("We do not have this size at the moment!");
 
         } else {
             System.out.println("Rented Ski info" + "\n"
-                                + "ski: " + ski.getSki().getBrand() + "\n"
-                                + "length: " + ski.getSki().getLength() + "\n"
-                                + "price: " + Utility.formatNumber(ski.getSki().getRentPricePerDay()) + "$");
+                                + "ski: " + skiInfo.getSki().getBrand() + "\n"
+                                + "length: " + skiInfo.getSki().getLength() + "\n"
+                                + "price: " + Utility.formatNumber(skiPrice) + "$");
         }
     }
 
@@ -197,40 +197,36 @@ public class SkiRent {
 //        }
 //    }
 
-    /*
-    Add person here
-     */
-    public void rentShoes(int shoeSize) {
-        double shoeProfit = 0;
+    public void rentShoes(SkiShoes skiShoes, int shoeSize, Person person) {
+        double shoePrice = skiShoes.getRentPricePerDay();
+
+        shoePrice -= shoePrice * person.getDiscount() /100;
 
         for (int i = 0; i < availableShoes.size(); i++) {
             if (availableShoes.get(i).getShoeSize() == shoeSize) {
                 SkiShoes localShoes = availableShoes.get(i);
 
                 localShoes.getInfoShoe();
-                shoeProfit = localShoes.getRentPricePerDay();
+                shoePrice = localShoes.getRentPricePerDay();
                 takenShoes.add(localShoes);
                 availableShoes.remove(i);
                 break;
             }
         }
 
-        if (shoeProfit == 0) {
+        if (shoePrice == 0) {
             System.out.println("There are no shoes " + shoeSize + " size" +
                     "\n" + "Please insert correct size");
         } else {
-            System.out.println("Price: " + Utility.formatNumber(shoeProfit) + "$");
-            profit = profit + (shoeProfit);
+            System.out.println("Price for " + person + " is " + Utility.formatNumber(shoePrice) + "$");
+            profit += (shoePrice);
         }
         System.out.println();
     }
 
-    /*
-    Add person here
-     */
-    public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize) {
-        rentSki(skiLength);
-        rentShoes(shoeSize);
+    public void rentSkiAndShoes(Ski ski, SkiSizeTypes skiLength, SkiShoes skiShoes, int shoeSize, Person person) {
+        rentSki(ski, skiLength, person);
+        rentShoes(skiShoes, shoeSize, person);
     }
 
     /*

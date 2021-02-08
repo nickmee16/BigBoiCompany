@@ -1,10 +1,13 @@
 package com.np.BigBoiCompany.SkiResort;
 
 import com.np.BigBoiCompany.IProfitable;
+import com.np.BigBoiCompany.Person.Base.Person;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.SkiHotel;
+import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiRent;
+import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base.SkiShoes;
 import com.np.BigBoiCompany.Utility;
 
 
@@ -39,16 +42,16 @@ public class SkiResort implements IProfitable {
         return hotel;
     }
 
-    public void rentSki(SkiSizeTypes skiLength) {
-        skiRent.rentSki(skiLength);
+    public void rentSki(Ski ski, SkiSizeTypes skiLength, Person person) {
+        skiRent.rentSki(ski, skiLength, person);
     }
 
-    public void rentShoes(int shoeSize) {
-        skiRent.rentShoes(shoeSize);
+    public void rentShoes(SkiShoes skiShoes, int shoeSize, Person person) {
+        skiRent.rentShoes(skiShoes, shoeSize, person);
     }
 
-    public void rentSkiAndShoes(SkiSizeTypes skiLength, int shoeSize) {
-        skiRent.rentSkiAndShoes(skiLength, shoeSize);
+    public void rentSkiAndShoes(Ski ski, SkiSizeTypes skiLength, SkiShoes skiShoes, int shoeSize, Person person) {
+        skiRent.rentSkiAndShoes(ski, skiLength, skiShoes, shoeSize, person);
     }
 
     public void returnSki(SkiSizeTypes skiLength) {

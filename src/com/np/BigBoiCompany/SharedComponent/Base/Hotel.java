@@ -1,5 +1,6 @@
 package com.np.BigBoiCompany.SharedComponent.Base;
 
+import com.np.BigBoiCompany.Person.Base.Person;
 import com.np.BigBoiCompany.Utility;
 
 import java.util.ArrayList;
