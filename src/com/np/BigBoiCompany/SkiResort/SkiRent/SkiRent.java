@@ -171,6 +171,8 @@ public class SkiRent {
         }
     }
 
+//   Can this code be deleted?
+
 //    public void rentSki(SkiSizeTypes skiLength) {
 //        SkiSizeTypes localType = SkiSizeTypes.NONE;
 //        double skiProfit = 0;
@@ -234,8 +236,11 @@ public class SkiRent {
       add discount for more slopes
       */
 
+    /* person and discount for person type added
+     */
 
-    public void rentPassForSlope(SlopeType... slope) {
+
+    public void rentPassForSlope(Person person, SlopeType... slope) {
         ArrayList<SlopeType> slopeAL = new ArrayList<>(Arrays.asList(slope));
 
         for(int i = 0; i < slopeAL.size() - 1; i++) {
@@ -267,9 +272,10 @@ public class SkiRent {
         }
         System.out.println(discount);
         price = price *  ((double) (100 - discount) / 100);
+        price -= price * person.getDiscount() / 100;
 
         if(discount == 0) {
-            System.out.println("Total: " + Utility.formatNumber(price) + "$");
+            System.out.println("Total price for " + person + " is " + Utility.formatNumber(price) + "$");
         } else {
             System.out.println("Total with discount for package of " + slopeAL.size() + " slopes: " + Utility.formatNumber(price) + "$");
         }
@@ -278,7 +284,7 @@ public class SkiRent {
     /*
     Need to be changed by person ID
      */
-    public void returnSki(SkiSizeTypes skiLength) {
+    public void returnSki(Person person, SkiSizeTypes skiLength) {
         int countSki = 0;
 
         for(int i = 0; i < availableSkis.size(); i++) {
@@ -298,7 +304,7 @@ public class SkiRent {
     /*
   Need to be changed by person ID
    */
-    public void returnShoes(int shoeSize) {
+    public void returnShoes(Person person, int shoeSize) {
         int countShoes = 0;
 
         for (int i = 0; i < takenShoes.size(); i++) {
@@ -320,8 +326,8 @@ public class SkiRent {
     /*
   Need to be changed by person ID
    */
-    public void returnSkiAndShoes(SkiSizeTypes skiLength,  int shoeSize) {
-        returnSki(skiLength);
-        returnShoes(shoeSize);
+    public void returnSkiAndShoes(Person person, SkiSizeTypes skiLength,  int shoeSize) {
+        returnSki(person, skiLength);
+        returnShoes(person, shoeSize);
     }
 }
