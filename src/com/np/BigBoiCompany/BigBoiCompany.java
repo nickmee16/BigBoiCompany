@@ -6,6 +6,7 @@ import com.np.BigBoiCompany.Person.Guest;
 import com.np.BigBoiCompany.Restaurant.Restaurant;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.Base.HotelTypes;
+import com.np.BigBoiCompany.SkiResort.SkiRent.SkiRent;
 import com.np.BigBoiCompany.SkiResort.SkiResort;
 import com.np.BigBoiCompany.Person.Employee;
 
@@ -30,7 +31,7 @@ public class BigBoiCompany {
         populateAvailableHotels();
         populateAssets();
 
-        // should not hardcode creation of the beach resort, restaurant and ski resort
+        // Angie's comment: should not hardcode creation of the beach resort, restaurant and ski resort
     }
 
     public void setSkiResort(SkiResort skiResort) {

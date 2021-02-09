@@ -17,9 +17,25 @@ public class SkiResort implements IProfitable {
     private final SkiRent skiRent;
     private final Hotel hotel;
 
+
+
     public SkiResort(String name) {
         this.name = name;
         this.skiRent = new SkiRent();
+        this.hotel = new SkiHotel();
+    }
+
+    /*
+      Angie's comment:
+      If constructor is left as above, buying skis and shoes doesn't work as SkiResort creates a SkiRent object
+      and we need to use the SkiRent class to be able to populate the array list.
+      Below I created a separate constructor so that we can instantiate the correct SkiRent to be able to buy ski and
+      ski shoes.
+       */
+
+    public SkiResort(String name, SkiRent skiRent) {
+        this.name = name;
+        this.skiRent = skiRent;
         this.hotel = new SkiHotel();
     }
 
@@ -54,15 +70,15 @@ public class SkiResort implements IProfitable {
         skiRent.rentSkiAndShoes(ski, skiLength, skiShoes, shoeSize, person);
     }
 
-    public void returnSki(SkiSizeTypes skiLength) {
-        skiRent.returnSki(skiLength);
+    public void returnSki(Person person, SkiSizeTypes skiLength) {
+        skiRent.returnSki(person,skiLength);
     }
 
-    public void returnShoes(int shoeSize) {
-        skiRent.returnShoes(shoeSize);
+    public void returnShoes(Person person, int shoeSize) {
+        skiRent.returnShoes(person, shoeSize);
     }
-    public void returnSkiAndShoes(SkiSizeTypes skiLength,  int shoeSize) {
-        skiRent.returnSkiAndShoes(skiLength, shoeSize);
+    public void returnSkiAndShoes(Person person, SkiSizeTypes skiLength,  int shoeSize) {
+        skiRent.returnSkiAndShoes(person, skiLength, shoeSize);
     }
 
 }
