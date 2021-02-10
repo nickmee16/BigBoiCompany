@@ -34,65 +34,40 @@ public class SkiRent {
         populateSlopes();
     }
 
-//    private void populateSkiShoes() {
-//        for (int i = 36; i < 46; i++) {
-//            SkiShoes shoe1 = new ShoeK2(i);
-//            SkiShoes shoe2 = new ShoeRossignol(i);
-//            SkiShoes shoe3 = new ShoeLine(i);
-//            for (int y = 0; y < 2; y++) {
-//                this.availableShoes.add(shoe1);
-//                this.availableShoes.add(shoe2);
-//                this.availableShoes.add(shoe3);
-//            }
-//        }
-//    }
-
-//    private void populateSki() {
-//        Ski ski1 = new SkiK2();
-//        Ski ski2 = new SkiRossignol();
-//        Ski ski3 = new SkiLine();
-//        Ski ski4 = new SkiFishcher();
-//        Ski ski5 = new SkiVolkl();
-//        availableSkis.add(ski1);
-//        availableSkis.add(ski2);
-//        availableSkis.add(ski3);
-//        availableSkis.add(ski4);
-//        availableSkis.add(ski5);
-//
-//    }
-
-
     /*
     come back when you add budget
     */
 
     public void buySki(SkiSizeTypes skiLength, int numberOfPairs) {
         SkiInfo ski;
-        int id = skiNew.size() + 1;
-
-        for(int i = 0; i < skiNew.size() - 1; i++) {
-            if(skiNew.get(i).getId() + 1 != skiNew.get(i + 1).getId()) {
-                id = skiNew.get(i).getId() + 1;
-            }
-        }
-
-        if(skiLength.equals(SkiSizeTypes.VERY_SMALL)) {
-            ski = new SkiInfo(id, new SkiFishcher(), 100, 0);
-
-        } else if(skiLength.equals(SkiSizeTypes.SMALL)) {
-            ski = new SkiInfo(id, new SkiLine(), 100, 0);
-
-        } else if(skiLength.equals(SkiSizeTypes.MEDIUM)) {
-            ski = new SkiInfo(id, new SkiRossignol(), 100, 0);
-
-        } else if(skiLength.equals(SkiSizeTypes.LONG)) {
-            ski = new SkiInfo(id, new SkiK2(), 100, 0);
-
-        } else {
-            ski = new SkiInfo(id, new SkiVolkl(), 100, 0);
-        }
 
         for (int i = 0; i < numberOfPairs; i++) {
+
+            int id = skiNew.size() + 1;
+
+            for (int y = 0; y < skiNew.size() - 1; y++) {
+                if (skiNew.get(y).getId() + 1 != skiNew.get(y + 1).getId()) {
+                    id = skiNew.get(y).getId() + 1;
+                }
+            }
+
+            if (skiLength.equals(SkiSizeTypes.VERY_SMALL)) {
+                ski = new SkiInfo(id, new SkiFishcher(), 100, 0);
+
+            } else if (skiLength.equals(SkiSizeTypes.SMALL)) {
+                ski = new SkiInfo(id, new SkiLine(), 100, 0);
+
+            } else if (skiLength.equals(SkiSizeTypes.MEDIUM)) {
+                ski = new SkiInfo(id, new SkiRossignol(), 100, 0);
+
+            } else if (skiLength.equals(SkiSizeTypes.LONG)) {
+                ski = new SkiInfo(id, new SkiK2(), 100, 0);
+
+            } else {
+                ski = new SkiInfo(id, new SkiVolkl(), 100, 0);
+            }
+
+
             skiNew.add(ski);
         }
     }
@@ -171,33 +146,6 @@ public class SkiRent {
         }
     }
 
-//   Can this code be deleted?
-
-//    public void rentSki(SkiSizeTypes skiLength) {
-//        SkiSizeTypes localType = SkiSizeTypes.NONE;
-//        double skiProfit = 0;
-//
-//        for(int i = 0; i < availableSkis.size(); i++) {
-//            if(availableSkis.get(i).getLength() == skiLength) {
-//                Ski localSki = availableSkis.get(i);
-//
-//                System.out.println("You rented:");
-//                localSki.getInfoSki();
-//                skiProfit = localSki.getRentPricePerDay();
-//                localType = localSki.getLength();
-//                break;
-//            }
-//        }
-//
-//        if (localType == SkiSizeTypes.NONE) {
-//            System.out.println("There are no ski with length " + skiLength.getValue() +
-//                    "\n" + "Please insert correct ski length");
-//        } else {
-//            System.out.println("Price: " + Utility.formatNumber(skiProfit) + "$");
-//            profit = profit + (skiProfit);
-//            System.out.println();
-//        }
-//    }
 
     public void rentShoes(SkiShoes skiShoes, int shoeSize, Person person) {
         double shoePrice = skiShoes.getRentPricePerDay();
@@ -230,14 +178,6 @@ public class SkiRent {
         rentSki(ski, skiLength, person);
         rentShoes(skiShoes, shoeSize, person);
     }
-
-    /*
-      Add person here
-      add discount for more slopes
-      */
-
-    /* person and discount for person type added
-     */
 
 
     public void rentPassForSlope(Person person, SlopeType... slope) {
