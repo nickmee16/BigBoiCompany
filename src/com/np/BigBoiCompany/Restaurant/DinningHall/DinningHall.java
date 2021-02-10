@@ -10,6 +10,7 @@ import com.np.BigBoiCompany.Restaurant.DinningHall.Order.Order;
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
 import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 import com.np.BigBoiCompany.Utility;
+import javafx.scene.control.Tab;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -177,6 +178,18 @@ public class DinningHall {
             bill -= bill * person.getDiscount() / 100;
             System.out.println("Your bill with discount is: " + Utility.formatNumber(bill) + "$");
         }
+
+        if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 20 /100) {
+            System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
+        }
+
+
+//        boolean payTab = true;
+
+//        if (payTab){
+//             = person.getSalary() - bill;
+//        }
+
         profit += bill;
         tableOrders.remove(table);
         availableTables.add(table);
