@@ -8,7 +8,7 @@ import com.np.BigBoiCompany.Utility;
 public class WoodenChair extends BeachChair {
 
     public WoodenChair() {
-        super(BeachChairEnum.WOODEN, 5.00);
+        super(BeachChairEnum.WOODEN, 5.00, 50);
     }
 
 }

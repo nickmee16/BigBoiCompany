@@ -20,6 +20,14 @@ public class BeachResort implements IProfitable {
         this.hotel = new BeachHotel();
     }
 
+    public void setHotel(Hotel hotel) {
+        this.hotel = hotel;
+    }
+
+    public void setBeach(Beach beach) {
+        this.beach = beach;
+    }
+
     @Override
     public double getProfit() {
         return hotel.getProfit() + beach.getProfit();
@@ -45,4 +53,6 @@ public class BeachResort implements IProfitable {
     public Hotel getHotel() {
         return hotel;
     }
+
+
 }
