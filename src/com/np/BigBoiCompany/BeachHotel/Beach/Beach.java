@@ -4,6 +4,10 @@ import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChair;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.LeatherChair;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.WoodenChair;
+import com.np.BigBoiCompany.Person.Base.PersonType;
+import com.np.BigBoiCompany.Person.Customer;
+import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
+import com.np.BigBoiCompany.SharedComponent.BeachHotel;
 import com.np.BigBoiCompany.Utility;
 import com.np.BigBoiCompany.Person.Base.Person;
 
@@ -13,8 +17,16 @@ public class Beach {
     private int countL = 0;
     private int countW = 0;
     private double profit = 0;
-//    private final ArrayList<BeachChair> availableChairs = new ArrayList<>();
-//    private final ArrayList<BeachChair> takenChairs = new ArrayList<>();
+    private BeachHotel beachHotel;
+
+    public Beach (BeachHotel beachHotel) {
+        this.beachHotel = beachHotel;
+        populateChair();
+    }
+
+    public void setBeachHotel(BeachHotel beachHotel) {
+        this.beachHotel = beachHotel;
+    }
 
     public Beach() {
         populateChair();
@@ -42,56 +54,61 @@ public class Beach {
     }
 
     public void rentChair(BeachChairEnum beachChair, int rentHours, Person person) {
+
         BeachChair chair;
 
-        switch (beachChair) {
-            case WOODEN:
-                if(countW > 0) {
-                    countW--;
-                    chair = new WoodenChair();
-                } else {
-                    if(countL > 0) {
-                        System.out.println("Take a leather chair");
+        if (!person.getPersonType().equals(PersonType.GUEST) && beachHotel.getAvailableApartments().size() == 0){
+            System.out.println("Sorry, there are no free places today!");
+        } else {
+            switch (beachChair) {
+                case WOODEN:
+                    if (countW > 0) {
+                        countW--;
+                        chair = new WoodenChair();
                     } else {
-                        System.out.println("Lay on the beach");
+                        if (countL > 0) {
+                            System.out.println("Take a leather chair");
+                        } else {
+                            System.out.println("Lay on the beach");
+                        }
+                        return;
                     }
-                    return;
-                }
-                break;
-            case LEATHER:
-                if(countL > 0) {
-                    countL--;
+                    break;
+                case LEATHER:
+                    if (countL > 0) {
+                        countL--;
+                        chair = new LeatherChair();
+                    } else {
+                        if (countW > 0) {
+                            System.out.println("Take a wooden chair");
+                        } else {
+                            System.out.println("Lay on the beach");
+                        }
+                        return;
+                    }
+                    break;
+                default:
                     chair = new LeatherChair();
-                } else {
-                    if(countW > 0) {
-                        System.out.println("Take a wooden chair");
-                    } else {
-                        System.out.println("Lay on the beach");
-                    }
-                    return;
-                }
-                break;
-            default:
-                chair = new LeatherChair();
-                break;
+                    break;
+            }
+
+            double price = chair.getRentPricePerHour();
+            price -= price * person.getDiscount() / 100;
+
+
+            System.out.println("You have rented a");
+            chair.getInfoChair();
+            System.out.println("Price for " + person + " is " + Utility.formatNumber(price * rentHours) + "$");
+            System.out.println();
+            profit += price * rentHours;
         }
-
-        double price = chair.getRentPricePerHour();
-
-        price -= price * person.getDiscount() / 100;
-
-        System.out.println("You have rented a");
-        chair.getInfoChair();
-        System.out.println("Price for " + person + " is " + Utility.formatNumber(price * rentHours) + "$");
-        System.out.println();
-        profit += price * rentHours;
     }
 
     public void returnBeachChair(BeachChairEnum beachChair) {
 
         switch (beachChair) {
             case WOODEN:
-                if(countW < 16) {
+                if (countW < 16) {
                     countW++;
                     System.out.println("You returned wooden chair");
                 } else {
@@ -99,7 +116,7 @@ public class Beach {
                 }
                 break;
             case LEATHER:
-                if(countL < 16) {
+                if (countL < 16) {
                     countL++;
                     System.out.println("You returned leather chair");
                 } else {
@@ -111,3 +128,4 @@ public class Beach {
         }
     }
 }
+

@@ -18,6 +18,7 @@ public abstract class Hotel {
     private double profit;
     private HotelTypes type;
 
+
     protected Hotel(int floors, int apartments, HotelTypes type) {
         this.floors = floors;
         this.apartments = apartments;
@@ -29,7 +30,6 @@ public abstract class Hotel {
         this.profit = 0;
         this.type = type;
 
-
         setApartments(apartments);
         setFloors(floors);
         populateAvailableApartments();
@@ -37,6 +37,18 @@ public abstract class Hotel {
 
     public double getProfit() {
         return profit;
+    }
+
+    public int getApartments() {
+        return apartments;
+    }
+
+    public int getLimitApartment() {
+        return limitApartment;
+    }
+
+    public ArrayList<Integer> getAvailableApartments() {
+        return availableApartments;
     }
 
     public void checkProfit() {

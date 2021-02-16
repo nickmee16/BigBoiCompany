@@ -1,11 +1,15 @@
 package com.np;
 
+import com.np.BigBoiCompany.BeachHotel.Beach.Beach;
+import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.BeachHotel.BeachResort;
 import com.np.BigBoiCompany.BigBoiCompany;
 import com.np.BigBoiCompany.Person.Customer;
 import com.np.BigBoiCompany.Person.Employee;
 import com.np.BigBoiCompany.Person.Guest;
 import com.np.BigBoiCompany.Restaurant.Restaurant;
+import com.np.BigBoiCompany.SharedComponent.Base.HotelTypes;
+import com.np.BigBoiCompany.SharedComponent.BeachHotel;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.SkiRossignol;
@@ -23,6 +27,11 @@ public class Test {
         BigBoiCompany bigBoiCompany = new BigBoiCompany();
         BeachResort beachResort = new BeachResort("Kole");
         Restaurant restaurant = new Restaurant("Restaurant", 100);
+        BeachHotel beachHotel = new BeachHotel();
+        beachResort.setHotel(beachHotel);
+
+        Beach beach = new Beach(beachHotel);
+        beachResort.setBeach(beach);
 
         // Angie: I don't like this for some reason, better way?
         SkiRent skiRent = new SkiRent();
@@ -35,35 +44,15 @@ public class Test {
         bigBoiCompany.setRestaurant(restaurant);
         bigBoiCompany.setSkiResort(skiResort);
 
-        Ski ski = new SkiRossignol(SkiSizeTypes.LONG);
 
-        SkiShoes skiShoes = new ShoeRossignol(38);
-        SkiShoes skiShoes1 = new ShoeK2(37);
+        beachHotel.rentApartment(1, 3);
+        beachHotel.rentApartment(2, 3);
+        beachHotel.rentApartment(3, 3);
+        beachHotel.rentApartment(4, 3);
+        beachHotel.rentApartment(5, 3);
 
-//        skiRent.rentPassForSlope(employee, 4, SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2,
-//                                SlopeType.MEDIUM_2);
-//        skiRent.rentPassForSlope(guest, 4, SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2,
-//                                SlopeType.MEDIUM_2, SlopeType.HARD_1);
-        skiRent.rentPassForSlope(employee, 2, SlopeType.EASY_1);
+        beachResort.getHotel().showAvailableApartments();
 
-
-        skiRent.buySki(ski, 10);
-        skiRent.buyShoes(SkiBrands.ROSSIGNOL, 38, 10);
-        skiRent.buyShoes(SkiBrands.K2, 37, 20);
-
-        skiResort.rentSki(1, employee, 4);
-        skiResort.rentShoes(skiShoes, 38, employee, 3);
-        skiResort.rentShoes(skiShoes1, 37, employee, 4);
-
-        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
-
-//        skiRent.returnSki(employee);
-//        skiRent.returnSki(guest);
-
-//        skiRent.returnShoes(employee);
-//        skiRent.returnShoes(guest);
-//        skiRent.returnSkiAndShoes(employee);
-
-
+        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, guest);
     }
 }
