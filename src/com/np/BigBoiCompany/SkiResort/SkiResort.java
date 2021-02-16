@@ -5,9 +5,10 @@ import com.np.BigBoiCompany.Person.Base.Person;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.SkiHotel;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
-import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
+import com.np.BigBoiCompany.SkiResort.SkiRent.SkiBrands;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiRent;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base.SkiShoes;
+import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.SlopeType;
 import com.np.BigBoiCompany.Utility;
 
 
@@ -44,7 +45,6 @@ public class SkiResort implements IProfitable {
         return hotel.getProfit() + skiRent.getProfit();
     }
 
-
     public void getInfo() {
         System.out.println(name);
     }
@@ -58,27 +58,52 @@ public class SkiResort implements IProfitable {
         return hotel;
     }
 
-    public void rentSki(Ski ski, SkiSizeTypes skiLength, Person person) {
-        skiRent.rentSki(ski, skiLength, person);
+    public void buySki(Ski ski, int numberOfPairs) {
+        skiRent.buySki(ski, numberOfPairs);
     }
 
-    public void rentShoes(SkiShoes skiShoes, int shoeSize, Person person) {
-        skiRent.rentShoes(skiShoes, shoeSize, person);
+    public void buyShoes(SkiBrands brand, int size, int numberOfPairs) {
+        skiRent.buyShoes(brand, size, numberOfPairs);
     }
 
-    public void rentSkiAndShoes(Ski ski, SkiSizeTypes skiLength, SkiShoes skiShoes, int shoeSize, Person person) {
-        skiRent.rentSkiAndShoes(ski, skiLength, skiShoes, shoeSize, person);
+    public void rentSki(int skiID, Person person, int days) {
+        skiRent.rentSki(skiID, person, days);
     }
 
-    public void returnSki(Person person, SkiSizeTypes skiLength) {
-        skiRent.returnSki(person,skiLength);
+    public void rentShoes(SkiShoes skiShoes, int shoeSize, Person person,  int days) {
+        skiRent.rentShoes(skiShoes, shoeSize, person, days);
     }
 
-    public void returnShoes(Person person, int shoeSize) {
-        skiRent.returnShoes(person, shoeSize);
+    public void rentSkiAndShoes(int skiID, SkiShoes skiShoes, int shoeSize, Person person,  int days) {
+        skiRent.rentSkiAndShoes(skiID, skiShoes, shoeSize, person, days);
     }
-    public void returnSkiAndShoes(Person person, SkiSizeTypes skiLength,  int shoeSize) {
-        skiRent.returnSkiAndShoes(person, skiLength, shoeSize);
+
+    public void rentPassForSlope(Person person,  int days, SlopeType... slope) {
+        skiRent.rentPassForSlope(person, days, slope);
+    }
+
+    public void goDownTheSlope(Person person, SlopeType slope) {
+        skiRent.goDownTheSlope(person, slope);
+    }
+
+    public void repairSki(int skiID) {
+        skiRent.repairSki(skiID);
+    }
+
+    public void destroySki(int skiID) {
+        skiRent.destroySki(skiID);
+    }
+
+    public void returnSki(Person person) {
+        skiRent.returnSki(person);
+    }
+
+    public void returnShoes(Person person) {
+        skiRent.returnShoes(person);
+    }
+
+    public void returnSkiAndShoes(Person person) {
+        skiRent.returnSkiAndShoes(person);
     }
 
 }

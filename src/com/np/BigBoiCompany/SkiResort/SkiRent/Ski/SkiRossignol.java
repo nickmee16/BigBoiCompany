@@ -6,8 +6,8 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.Utility;
 
 public class SkiRossignol extends Ski {
-    public SkiRossignol() {
-        super(SkiBrands.ROSSIGNOL, 5.00, 235, 35, SkiSizeTypes.MEDIUM);
+    public SkiRossignol(SkiSizeTypes size) {
+        super(SkiBrands.ROSSIGNOL, 5.00, 235, 35, size);
     }
 
     @Override

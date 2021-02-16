@@ -2,12 +2,10 @@ package com.np.BigBoiCompany.SkiResort.SkiRent;
 
 import com.np.BigBoiCompany.Person.Base.Person;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiInfo;
-import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base.SkiShoes;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeK2;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeRossignol;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeLine;
-import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.*;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.*;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.Slope;
@@ -16,72 +14,52 @@ import com.np.BigBoiCompany.Utility;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class SkiRent {
 
     private double profit = 0;
-    private ArrayList<Ski> availableSkis = new ArrayList<>();
+    private ArrayList<SkiInfo> availableSkis = new ArrayList<>();
+    private HashMap<Person, SkiInfo> takenSki = new HashMap<>();
     private ArrayList<SkiShoes> availableShoes = new ArrayList<>();
-    private ArrayList<SkiShoes> takenShoes = new ArrayList<>();
-    private ArrayList<SkiInfo> skiNew = new ArrayList<>();
-    private ArrayList<SkiInfo> skiNewTaken = new ArrayList<>();
+    private HashMap<Person, SkiShoes> takenShoes = new HashMap<>();
     private ArrayList<Slope> slopes = new ArrayList<>();
+    private HashMap<Person, SlopeType> allowedSLopes = new HashMap<>();
 
 
     public SkiRent() {
-//        populateSki();
-//        populateSkiShoes();
         populateSlopes();
     }
 
-    /*
-    come back when you add budget
-    */
-
-    public void buySki(SkiSizeTypes skiLength, int numberOfPairs) {
-        SkiInfo ski;
+    public void buySki(Ski ski, int numberOfPairs) {
+        SkiInfo skiInfo;
 
         for (int i = 0; i < numberOfPairs; i++) {
 
-            int id = skiNew.size() + 1;
+            int id = availableSkis.size() + 1;
 
-            for (int y = 0; y < skiNew.size() - 1; y++) {
-                if (skiNew.get(y).getId() + 1 != skiNew.get(y + 1).getId()) {
-                    id = skiNew.get(y).getId() + 1;
+            for (int y = 0; y < availableSkis.size() - 1; y++) {
+                if (availableSkis.get(y).getId() + 1 != availableSkis.get(y + 1).getId()) {
+                    id = availableSkis.get(y).getId() + 1;
                 }
             }
 
-            if (skiLength.equals(SkiSizeTypes.VERY_SMALL)) {
-                ski = new SkiInfo(id, new SkiFishcher(), 100, 0);
+            skiInfo = new SkiInfo(id, ski, 100, 0);
 
-            } else if (skiLength.equals(SkiSizeTypes.SMALL)) {
-                ski = new SkiInfo(id, new SkiLine(), 100, 0);
-
-            } else if (skiLength.equals(SkiSizeTypes.MEDIUM)) {
-                ski = new SkiInfo(id, new SkiRossignol(), 100, 0);
-
-            } else if (skiLength.equals(SkiSizeTypes.LONG)) {
-                ski = new SkiInfo(id, new SkiK2(), 100, 0);
-
-            } else {
-                ski = new SkiInfo(id, new SkiVolkl(), 100, 0);
-            }
-
-
-            skiNew.add(ski);
+            availableSkis.add(skiInfo);
         }
     }
 
     public void buyShoes(SkiBrands brand, int size, int numberOfPairs) {
         SkiShoes shoe;
 
-        if(brand.equals(SkiBrands.K2)) {
+        if (brand.equals(SkiBrands.K2)) {
             shoe = new ShoeK2(size);
 
-        } else if(brand.equals(SkiBrands.LINE)) {
+        } else if (brand.equals(SkiBrands.LINE)) {
             shoe = new ShoeLine(size);
 
-        } else if(brand.equals(SkiBrands.ROSSIGNOL)) {
+        } else if (brand.equals(SkiBrands.ROSSIGNOL)) {
             shoe = new ShoeRossignol(size);
 
         } else {
@@ -89,13 +67,13 @@ public class SkiRent {
             return;
         }
 
-        for(int i = 0; i < numberOfPairs; i++) {
+        for (int i = 0; i < numberOfPairs; i++) {
             availableShoes.add(shoe);
         }
 
     }
 
-    public void populateSlopes() {
+    private void populateSlopes() {
         Slope e1 = new E1();
         Slope e2 = new E2();
         Slope m1 = new M1();
@@ -119,46 +97,67 @@ public class SkiRent {
         System.out.println();
     }
 
-    public void rentSki(Ski ski, SkiSizeTypes skiLength, Person person) {
-        SkiInfo skiInfo = null;
+    public void rentSki(int skiID, Person person, int days) {
+        SkiInfo ski = null;
 
-        double skiPrice = ski.getRentPricePerDay();
-        skiPrice -= skiPrice * person.getDiscount() /100;
+        if (skiID > availableSkis.size() + takenSki.size()) {
+            System.out.println("Wrong ID");
+            return;
+        }
 
-        for(int i = 0; i < skiNew.size(); i++) {
 
-            if(skiNew.get(i).getSki().getLength() == skiLength) {
-                skiInfo = skiNew.get(i);
-                skiNew.remove(i);
-                skiNewTaken.add(skiInfo);
+        for (int i = 0; i < availableSkis.size(); i++) {
+
+            if (availableSkis.get(i).getId() == skiID) {
+                ski = availableSkis.get(i);
+                availableSkis.remove(i);
+                takenSki.put(person, ski);
                 break;
             }
         }
 
-        if(skiInfo == null) {
-            System.out.println("We do not have this size at the moment!");
+
+        if (ski == null) {
+            System.out.println("Those ski are taken");
+
+        } else if (ski.getCondition() <= 40) {
+
+            double skiPrice = ski.getSki().getRentPricePerDay() * days;
+            skiPrice -= skiPrice * person.getDiscount() / 100;
+            skiPrice -= skiPrice * 60 / 100;
+
+            System.out.println("You get extra 60% discount");
+            System.out.println("Rented Ski info" + "\n"
+                    + "ski: " + ski.getSki().getBrand() + "\n"
+                    + "length: " + ski.getSki().getLength() + "\n"
+                    + "condition: " + ski.getCondition() + "%" + "\n"
+                    + "price: " + Utility.formatNumber(skiPrice * days) + "$");
 
         } else {
+
+            double skiPrice = ski.getSki().getRentPricePerDay() * days;
+            skiPrice -= skiPrice * person.getDiscount() / 100;
+
             System.out.println("Rented Ski info" + "\n"
-                                + "ski: " + skiInfo.getSki().getBrand() + "\n"
-                                + "length: " + skiInfo.getSki().getLength() + "\n"
-                                + "price: " + Utility.formatNumber(skiPrice) + "$");
+                    + "ski: " + ski.getSki().getBrand() + "\n"
+                    + "length: " + ski.getSki().getLength() + "\n"
+                    + "condition: " + ski.getCondition() + "%" + "\n"
+                    + "price: " + Utility.formatNumber(skiPrice * days) + "$");
         }
     }
 
-
-    public void rentShoes(SkiShoes skiShoes, int shoeSize, Person person) {
+    public void rentShoes(SkiShoes skiShoes, int shoeSize, Person person, int days) {
         double shoePrice = skiShoes.getRentPricePerDay();
 
-        shoePrice -= shoePrice * person.getDiscount() /100;
+        shoePrice -= shoePrice * person.getDiscount() / 100;
 
         for (int i = 0; i < availableShoes.size(); i++) {
             if (availableShoes.get(i).getShoeSize() == shoeSize) {
                 SkiShoes localShoes = availableShoes.get(i);
 
                 localShoes.getInfoShoe();
-                shoePrice = localShoes.getRentPricePerDay();
-                takenShoes.add(localShoes);
+                shoePrice = localShoes.getRentPricePerDay() * days;
+                takenShoes.put(person, localShoes);
                 availableShoes.remove(i);
                 break;
             }
@@ -174,20 +173,19 @@ public class SkiRent {
         System.out.println();
     }
 
-    public void rentSkiAndShoes(Ski ski, SkiSizeTypes skiLength, SkiShoes skiShoes, int shoeSize, Person person) {
-        rentSki(ski, skiLength, person);
-        rentShoes(skiShoes, shoeSize, person);
+    public void rentSkiAndShoes(int skiID, SkiShoes skiShoes, int shoeSize, Person person, int days) {
+        rentSki(skiID, person, days);
+        rentShoes(skiShoes, shoeSize, person, days);
     }
 
-
-    public void rentPassForSlope(Person person, SlopeType... slope) {
+    public void rentPassForSlope(Person person, int days, SlopeType... slope) {
         ArrayList<SlopeType> slopeAL = new ArrayList<>(Arrays.asList(slope));
 
-        for(int i = 0; i < slopeAL.size() - 1; i++) {
+        for (int i = 0; i < slopeAL.size() - 1; i++) {
 
-            for(int y = i + 1; y < slopeAL.size(); y++) {
+            for (int y = i + 1; y < slopeAL.size(); y++) {
 
-                if(slopeAL.get(i) == slopeAL.get(y)) {
+                if (slopeAL.get(i) == slopeAL.get(y)) {
                     slopeAL.remove(y);
                     y--;
                 }
@@ -196,78 +194,124 @@ public class SkiRent {
 
         int discount = 0;
 
-        if(slopeAL.size() > 1) {
+        if (slopeAL.size() > 1) {
             discount = 5 * slopeAL.size();
         }
 
         double price = 0;
-        for(int i = 0; i < slopeAL.size(); i++) {
+        for (int i = 0; i < slopeAL.size(); i++) {
             price += slopeAL.get(i).getPrice();
+            allowedSLopes.put(person, slopeAL.get(i));
 
-            for(int y = 0; y < slopes.size(); y++) {
-                if(slopes.get(y).getSlopeType() == slopeAL.get(i)) {
+            for (int y = 0; y < slopes.size(); y++) {
+                if (slopes.get(y).getSlopeType() == slopeAL.get(i)) {
                     System.out.println(slopeAL.get(i) + " price:" + Utility.formatNumber(slopeAL.get(i).getPrice()) + "$");
                 }
             }
         }
         System.out.println(discount);
-        price = price *  ((double) (100 - discount) / 100);
+        price = price * ((double) (100 - discount) / 100) * days;
         price -= price * person.getDiscount() / 100;
 
-        if(discount == 0) {
+        if (discount == 0) {
             System.out.println("Total price for " + person + " is " + Utility.formatNumber(price) + "$");
         } else {
             System.out.println("Total with discount for package of " + slopeAL.size() + " slopes: " + Utility.formatNumber(price) + "$");
         }
     }
 
-    /*
-    Need to be changed by person ID
-     */
-    public void returnSki(Person person, SkiSizeTypes skiLength) {
-        int countSki = 0;
+    public void goDownTheSlope(Person person, SlopeType slope) {
 
-        for(int i = 0; i < availableSkis.size(); i++) {
-            if(availableSkis.get(i).getLength() == skiLength) {
-                availableSkis.get(i).getInfoSki();
-                countSki++;
-            }
+        if (!allowedSLopes.containsKey(person)) {
+            System.out.println("This person has no passes for slopes");
+
+        } else if (allowedSLopes.containsKey(person) && !allowedSLopes.containsValue(slope)) {
+            System.out.println("This person has not pass for slope " + slope);
         }
 
-        if(countSki == 0) {
-            System.out.println("Wrong ski length");
-        } else {
-            System.out.println("You returned the ski");
+        if (allowedSLopes.containsKey(person) && allowedSLopes.containsValue(slope)
+                && takenSki.containsKey(person)) {
+
+            if (takenSki.get(person).getCondition() <= 40 && !(slope.equals(SlopeType.EASY_1) || slope.equals(SlopeType.EASY_2))) {
+                System.out.println("The condition of the ski(" + takenSki.get(person).getCondition() + "%) is too dangerous for skiing on slopes different than " + SlopeType.EASY_1 + " and " + SlopeType.EASY_2);
+
+            } else {
+                takenSki.get(person).setCondition(takenSki.get(person).getCondition() - slope.getDmg());
+                System.out.println(person.getName() + " went down on slope " + slope + "(" + takenSki.get(person).getSki().getBrand() + ", id:" + takenSki.get(person).getId() + ", new condition:" + takenSki.get(person).getCondition() + "%)");
+            }
         }
     }
 
-    /*
-  Need to be changed by person ID
-   */
-    public void returnShoes(Person person, int shoeSize) {
-        int countShoes = 0;
+    public void repairSki(int skiID) {
 
-        for (int i = 0; i < takenShoes.size(); i++) {
-            if (takenShoes.get(i).getShoeSize() == shoeSize) {
-                availableShoes.add(takenShoes.get(i));
-                takenShoes.remove(i);
-                countShoes++;
+        if (skiID > availableSkis.size() + takenSki.size()) {
+            System.out.println("Wrong ID");
+            return;
+        }
+
+        for(int i = 0; i < availableSkis.size(); i++) {
+
+            if(skiID == availableSkis.get(i).getId()) {
+
+                if(100 - availableSkis.get(i).getTimesRepaired() * 20 == 20) {
+                    System.out.println("Those ski can not be repaired anymore");
+
+                } else if(availableSkis.get(i).getCondition() > 10) {
+                    System.out.println("These ski do not required repairing");
+
+                } else {
+                    availableSkis.get(i).setTimesRepaired(availableSkis.get(i).getTimesRepaired() + 1);
+                    availableSkis.get(i).setCondition(100 - availableSkis.get(i).getTimesRepaired() * 20);
+
+                    System.out.println("Ski " + availableSkis.get(i).getSki().getBrand() + " (" + availableSkis.get(i).getId() + ")" + "\n"
+                            + "have been repaired (times repaired: " + availableSkis.get(i).getTimesRepaired() +  ")" + "\n"
+                            + "new condition: " + availableSkis.get(i).getCondition() + "%");
+                }
+            }
+        }
+    }
+
+    public void destroySki(int skiID) {
+
+        if (skiID > availableSkis.size() + takenSki.size()) {
+            System.out.println("Wrong ID");
+            return;
+        }
+
+        for(int i = 0; i < availableSkis.size(); i++) {
+            if(skiID == availableSkis.get(i).getId()) {
+                System.out.println("Ski " + availableSkis.get(i).getSki().getBrand() + " (id:" + availableSkis.get(i).getId() + ") were destroyed");
+                availableSkis.remove(availableSkis.get(i));
                 break;
             }
         }
+    }
 
-        if(countShoes == 0) {
-            System.out.println("Wrong shoe size");
+    public void returnSki(Person person) {
+
+        if (takenSki.containsKey(person)) {
+            availableSkis.add(takenSki.get(person));
+            takenSki.remove(person);
+            System.out.println(person.getName() + "(" + person.getPersonType() + ")" + " returned the ski");
+
         } else {
-            System.out.println("You returned the shoes");
+            System.out.println(person.getName() + "(" + person.getPersonType() + ")" + " have not rent ski");
         }
     }
 
-    /*
-  Need to be changed by person ID
-   */
-    public void returnSkiAndShoes(Person person, SkiSizeTypes skiLength,  int shoeSize) {
-        returnSki(person, skiLength);
-        returnShoes(person, shoeSize);
+    public void returnShoes(Person person) {
+        if (takenShoes.containsKey(person)) {
+            availableShoes.add(takenShoes.get(person));
+            takenShoes.remove(person);
+            System.out.println(person.getName() + "(" + person.getPersonType() + ")" + " returned the shoes");
+
+        } else {
+            System.out.println(person.getName() + "(" + person.getPersonType() + ")" + " have not rent shoes");
+        }
+    }
+
+    public void returnSkiAndShoes(Person person) {
+        returnSki(person);
+        returnShoes(person);
     }
 }

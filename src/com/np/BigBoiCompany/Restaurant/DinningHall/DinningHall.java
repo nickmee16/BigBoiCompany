@@ -10,7 +10,6 @@ import com.np.BigBoiCompany.Restaurant.DinningHall.Order.Order;
 import com.np.BigBoiCompany.Restaurant.Menu.Menu;
 import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 import com.np.BigBoiCompany.Utility;
-import javafx.scene.control.Tab;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -72,9 +71,11 @@ public class DinningHall {
     }
 
     public void takeTable(int table) {
+        if(table > tables) {
+            System.out.println("Wrong table number");
 
-        if(!availableTables.contains(table)) {
-            System.out.println("Wrong table number or already taken");
+        } else if(!availableTables.contains(table)) {
+            System.out.println("Table already taken");
 
         } else {
             tableOrders.put(table, new ArrayList<>());

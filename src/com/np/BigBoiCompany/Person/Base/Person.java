@@ -1,7 +1,5 @@
 package com.np.BigBoiCompany.Person.Base;
 
-import java.util.Objects;
-
 public class Person {
 
     private PersonType personType;

@@ -6,8 +6,8 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.Utility;
 
 public class SkiVolkl extends Ski {
-    public SkiVolkl() {
-        super(SkiBrands.VOLKL, 4.30, 230, 30, SkiSizeTypes.VERY_LONG);
+    public SkiVolkl(SkiSizeTypes size) {
+        super(SkiBrands.VOLKL, 4.30, 230, 30, size);
     }
 
     @Override

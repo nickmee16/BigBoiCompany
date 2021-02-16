@@ -14,7 +14,7 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.SkiRent;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base.SkiShoes;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeK2;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeRossignol;
-import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.Slope;
+
 import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.SlopeType;
 import com.np.BigBoiCompany.SkiResort.SkiResort;
 
@@ -35,25 +35,34 @@ public class Test {
         bigBoiCompany.setRestaurant(restaurant);
         bigBoiCompany.setSkiResort(skiResort);
 
-        Ski ski = new SkiRossignol();
+        Ski ski = new SkiRossignol(SkiSizeTypes.LONG);
 
         SkiShoes skiShoes = new ShoeRossignol(38);
         SkiShoes skiShoes1 = new ShoeK2(37);
 
-        skiRent.rentPassForSlope(employee, SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2,
-                                SlopeType.MEDIUM_2);
-        skiRent.rentPassForSlope(guest, SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2,
-                                SlopeType.MEDIUM_2, SlopeType.HARD_1);
-        skiRent.rentPassForSlope(customer, SlopeType.EASY_1);
+//        skiRent.rentPassForSlope(employee, 4, SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2,
+//                                SlopeType.MEDIUM_2);
+//        skiRent.rentPassForSlope(guest, 4, SlopeType.EASY_1, SlopeType.EASY_2, SlopeType.MEDIUM_1, SlopeType.EASY_2,
+//                                SlopeType.MEDIUM_2, SlopeType.HARD_1);
+        skiRent.rentPassForSlope(employee, 2, SlopeType.EASY_1);
 
 
-        skiRent.buySki(SkiSizeTypes.MEDIUM, 10);
+        skiRent.buySki(ski, 10);
         skiRent.buyShoes(SkiBrands.ROSSIGNOL, 38, 10);
         skiRent.buyShoes(SkiBrands.K2, 37, 20);
 
-        skiResort.rentSki(ski, SkiSizeTypes.MEDIUM, employee);
-        skiResort.rentShoes(skiShoes, 38, employee);
-        skiResort.rentShoes(skiShoes1, 37, employee);
+        skiResort.rentSki(1, employee, 4);
+        skiResort.rentShoes(skiShoes, 38, employee, 3);
+        skiResort.rentShoes(skiShoes1, 37, employee, 4);
+
+        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
+
+//        skiRent.returnSki(employee);
+//        skiRent.returnSki(guest);
+
+//        skiRent.returnShoes(employee);
+//        skiRent.returnShoes(guest);
+//        skiRent.returnSkiAndShoes(employee);
 
 
     }

@@ -6,8 +6,8 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.Utility;
 
 public class SkiFishcher extends Ski {
-    public SkiFishcher() {
-        super(SkiBrands.FISCHER, 4.60, 250, 50, SkiSizeTypes.VERY_SMALL);
+    public SkiFishcher(SkiSizeTypes size) {
+        super(SkiBrands.FISCHER, 4.60, 250, 50, size);
     }
 
     @Override

@@ -6,8 +6,8 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.Utility;
 
 public class SkiLine extends Ski {
-    public SkiLine() {
-        super(SkiBrands.LINE, 4.75, 240, 40, SkiSizeTypes.SMALL);
+    public SkiLine(SkiSizeTypes size) {
+        super(SkiBrands.LINE, 4.75, 240, 40, size);
     }
 
     @Override
