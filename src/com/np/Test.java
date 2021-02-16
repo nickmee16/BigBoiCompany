@@ -82,5 +82,6 @@ public class Test {
 //        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
 //        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
 
+        skiRent.rentSki(1, employee, 4);
     }
 }
