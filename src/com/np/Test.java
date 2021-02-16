@@ -60,5 +60,15 @@ public class Test {
         skiRent.buySki(ski1, 3);
 
         skiRent.rentSki(1, employee, 4);
+
+        beachHotel.rentApartment(1, 3);
+        beachHotel.rentApartment(2, 3);
+        beachHotel.rentApartment(3, 3);
+        beachHotel.rentApartment(4, 3);
+        beachHotel.rentApartment(5, 3);
+
+        beachResort.getHotel().showAvailableApartments();
+
+        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, guest);
     }
 }
