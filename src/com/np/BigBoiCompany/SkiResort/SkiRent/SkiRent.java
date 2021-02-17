@@ -126,14 +126,16 @@ public class SkiRent {
             skiPrice -= skiPrice * 60 / 100;
 
             System.out.println("You get extra 60% discount");
-            System.out.println("Rented Ski info" + "\n"
-                    + "ski: " + ski.getSki().getBrand() + "\n"
-                    + "length: " + ski.getSki().getLength() + "\n"
-                    + "condition: " + ski.getCondition() + "%" + "\n"
-                    + "price: " + Utility.formatNumber(skiPrice) + "$");
+            System.out.println("Rented ski info" + "\n"
+                    + "Brand: " + ski.getSki().getBrand() + "\n"
+                    + "Length: " + ski.getSki().getLength() + "\n"
+                    + "Condition: " + ski.getCondition() + "%" + "\n"
+                    + "Price: " + Utility.formatNumber(skiPrice) + "$");
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
               profit +=  putItOnTab(person, skiPrice);
+            } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
+                System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
             }
 
             profit += skiPrice;
@@ -145,11 +147,11 @@ public class SkiRent {
             skiPrice -= skiPrice * person.getDiscount() / 100;
             System.out.println(skiPrice + " asdsd");
 
-            System.out.println("Rented Ski info" + "\n"
-                    + "ski: " + ski.getSki().getBrand() + "\n"
-                    + "length: " + ski.getSki().getLength() + "\n"
-                    + "condition: " + ski.getCondition() + "%" + "\n"
-                    + "price: " + Utility.formatNumber(skiPrice) + "$");
+            System.out.println("Rented ski info" + "\n"
+                    + "Brand: " + ski.getSki().getBrand() + "\n"
+                    + "Length: " + ski.getSki().getLength() + "\n"
+                    + "Condition: " + ski.getCondition() + "%" + "\n"
+                    + "Price: " + Utility.formatNumber(skiPrice) + "$");
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
                 profit +=  putItOnTab(person, skiPrice);
@@ -181,15 +183,21 @@ public class SkiRent {
                     "\n" + "Please insert correct size");
         } else {
             System.out.println("Price for " + person + " is " + Utility.formatNumber(shoePrice) + "$");
+                if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+                profit += putItOnTab(person, shoePrice);
+            } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
+                System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
+            }
             profit += (shoePrice);
         }
         System.out.println();
+
     }
 
     public void rentSkiAndShoes(int skiID, SkiShoes skiShoes, int shoeSize, Person person, int days) {
         rentSki(skiID, person, days);
         rentShoes(skiShoes, shoeSize, person, days);
-    }
+            }
 
     public void rentPassForSlope(Person person, int days, SlopeType... slope) {
         ArrayList<SlopeType> slopeAL = new ArrayList<>(Arrays.asList(slope));
@@ -222,6 +230,13 @@ public class SkiRent {
                 }
             }
         }
+
+        if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+            profit +=  putItOnTab(person, price);
+        } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
+            System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
+        }
+
         System.out.println(discount);
         price = price * ((double) (100 - discount) / 100) * days;
         price -= price * person.getDiscount() / 100;
@@ -236,10 +251,10 @@ public class SkiRent {
     public void goDownTheSlope(Person person, SlopeType slope) {
 
         if (!allowedSLopes.containsKey(person)) {
-            System.out.println("This person has no passes for slopes");
+            System.out.println("This person does not have a valid pass for slopes.");
 
         } else if (allowedSLopes.containsKey(person) && !allowedSLopes.containsValue(slope)) {
-            System.out.println("This person has not pass for slope " + slope);
+            System.out.println("This person does not have a valid pass for " + slope);
         }
 
         if (allowedSLopes.containsKey(person) && allowedSLopes.containsValue(slope)
@@ -250,7 +265,7 @@ public class SkiRent {
 
             } else {
                 takenSki.get(person).setCondition(takenSki.get(person).getCondition() - slope.getDmg());
-                System.out.println(person.getName() + " went down on slope " + slope + "(" + takenSki.get(person).getSki().getBrand() + ", id:" + takenSki.get(person).getId() + ", new condition:" + takenSki.get(person).getCondition() + "%)");
+                System.out.println(person.getName() + " went down on slope " + slope + ". Ski info and state: " + takenSki.get(person).getSki().getBrand() + ", id:" + takenSki.get(person).getId() + ", condition:" + takenSki.get(person).getCondition() + "%.");
             }
         }
     }
@@ -328,9 +343,9 @@ public class SkiRent {
         returnShoes(person);
     }
 
-    private double putItOnTab(Person person, double price) {
+    public double putItOnTab(Person person, double price) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Do you want to be put on your tab! If yes insert Y/y:");
+        System.out.println("Do you want to be put on your tab? If yes insert Y/y:");
         String answer = scanner.nextLine().toLowerCase(Locale.ROOT);
 
         if(answer.equals("y")) {
@@ -345,7 +360,7 @@ public class SkiRent {
 
                 System.out.println("You will get over the limit:" + Utility.formatNumber((person.getSalary() * 30) / 100) + "$" +"\n"
                 + "New balance will be: " + Utility.formatNumber(person.getTab() + price) + "$" + "\n"
-                + "You can put part of the price on your tab and you must pay rest! If yes insert Y/y: ");
+                + "You can put part of the price on your tab and you must pay rest. If yes, insert Y/y: ");
                 String answer1 = scanner.nextLine().toLowerCase(Locale.ROOT);
 
                 if(answer1.equals("y")) {
@@ -363,7 +378,6 @@ public class SkiRent {
             System.out.println("Refused");
             return price;
         }
-
         return 0;
     }
 }
