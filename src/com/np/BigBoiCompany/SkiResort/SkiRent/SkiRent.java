@@ -1,6 +1,7 @@
 package com.np.BigBoiCompany.SkiResort.SkiRent;
 
 import com.np.BigBoiCompany.Person.Base.Person;
+import com.np.BigBoiCompany.Person.Base.PersonType;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiInfo;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.Base.SkiShoes;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiShoes.ShoeK2;
@@ -12,9 +13,7 @@ import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.Slope;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Slopes.Base.SlopeType;
 import com.np.BigBoiCompany.Utility;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public class SkiRent {
 
@@ -131,18 +130,32 @@ public class SkiRent {
                     + "ski: " + ski.getSki().getBrand() + "\n"
                     + "length: " + ski.getSki().getLength() + "\n"
                     + "condition: " + ski.getCondition() + "%" + "\n"
-                    + "price: " + Utility.formatNumber(skiPrice * days) + "$");
+                    + "price: " + Utility.formatNumber(skiPrice) + "$");
+
+            if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+              profit +=  putItOnTab(person, skiPrice);
+            }
+
+            profit += skiPrice;
 
         } else {
 
             double skiPrice = ski.getSki().getRentPricePerDay() * days;
+            System.out.println(skiPrice + " sadasd");
             skiPrice -= skiPrice * person.getDiscount() / 100;
+            System.out.println(skiPrice + " asdsd");
 
             System.out.println("Rented Ski info" + "\n"
                     + "ski: " + ski.getSki().getBrand() + "\n"
                     + "length: " + ski.getSki().getLength() + "\n"
                     + "condition: " + ski.getCondition() + "%" + "\n"
-                    + "price: " + Utility.formatNumber(skiPrice * days) + "$");
+                    + "price: " + Utility.formatNumber(skiPrice) + "$");
+
+            if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+                profit +=  putItOnTab(person, skiPrice);
+            }
+
+            profit += skiPrice;
         }
     }
 
@@ -249,14 +262,14 @@ public class SkiRent {
             return;
         }
 
-        for(int i = 0; i < availableSkis.size(); i++) {
+        for (int i = 0; i < availableSkis.size(); i++) {
 
-            if(skiID == availableSkis.get(i).getId()) {
+            if (skiID == availableSkis.get(i).getId()) {
 
-                if(100 - availableSkis.get(i).getTimesRepaired() * 20 == 20) {
+                if (100 - availableSkis.get(i).getTimesRepaired() * 20 == 20) {
                     System.out.println("Those ski can not be repaired anymore");
 
-                } else if(availableSkis.get(i).getCondition() > 10) {
+                } else if (availableSkis.get(i).getCondition() > 10) {
                     System.out.println("These ski do not required repairing");
 
                 } else {
@@ -264,7 +277,7 @@ public class SkiRent {
                     availableSkis.get(i).setCondition(100 - availableSkis.get(i).getTimesRepaired() * 20);
 
                     System.out.println("Ski " + availableSkis.get(i).getSki().getBrand() + " (" + availableSkis.get(i).getId() + ")" + "\n"
-                            + "have been repaired (times repaired: " + availableSkis.get(i).getTimesRepaired() +  ")" + "\n"
+                            + "have been repaired (times repaired: " + availableSkis.get(i).getTimesRepaired() + ")" + "\n"
                             + "new condition: " + availableSkis.get(i).getCondition() + "%");
                 }
             }
@@ -278,8 +291,8 @@ public class SkiRent {
             return;
         }
 
-        for(int i = 0; i < availableSkis.size(); i++) {
-            if(skiID == availableSkis.get(i).getId()) {
+        for (int i = 0; i < availableSkis.size(); i++) {
+            if (skiID == availableSkis.get(i).getId()) {
                 System.out.println("Ski " + availableSkis.get(i).getSki().getBrand() + " (id:" + availableSkis.get(i).getId() + ") were destroyed");
                 availableSkis.remove(availableSkis.get(i));
                 break;
@@ -313,5 +326,44 @@ public class SkiRent {
     public void returnSkiAndShoes(Person person) {
         returnSki(person);
         returnShoes(person);
+    }
+
+    private double putItOnTab(Person person, double price) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Do you want to be put on your tab! If yes insert Y/y:");
+        String answer = scanner.nextLine().toLowerCase(Locale.ROOT);
+
+        if(answer.equals("y")) {
+
+            if(person.getTab() + price <= (person.getSalary() * 30) / 100) {
+
+                person.setTab(person.getTab() + price);
+                System.out.println(person.getName() + " new tab balance:" + Utility.formatNumber(person.getTab()) + "$");
+                return 0;
+
+            } else {
+
+                System.out.println("You will get over the limit:" + Utility.formatNumber((person.getSalary() * 30) / 100) + "$" +"\n"
+                + "New balance will be: " + Utility.formatNumber(person.getTab() + price) + "$" + "\n"
+                + "You can put part of the price on your tab and you must pay rest! If yes insert Y/y: ");
+                String answer1 = scanner.nextLine().toLowerCase(Locale.ROOT);
+
+                if(answer1.equals("y")) {
+
+                    double rest = (person.getTab() + price) - ((person.getSalary() * 30) / 100);
+                    person.setTab((person.getSalary() * 30) / 100);
+                    System.out.println(person.getName() +  " new tab balance: " + Utility.formatNumber(person.getTab()) + "$" + "\n"
+                    + "Price: " + Utility.formatNumber(rest) + "$");
+                } else {
+                    System.out.println("Refused");
+                    return price;
+                }
+            }
+        } else {
+            System.out.println("Refused");
+            return price;
+        }
+
+        return 0;
     }
 }

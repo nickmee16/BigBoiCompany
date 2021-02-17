@@ -12,6 +12,7 @@ import com.np.BigBoiCompany.SharedComponent.Base.HotelTypes;
 import com.np.BigBoiCompany.SharedComponent.BeachHotel;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
+import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.SkiK2;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.SkiRossignol;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiBrands;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiRent;
@@ -44,15 +45,20 @@ public class Test {
         bigBoiCompany.setRestaurant(restaurant);
         bigBoiCompany.setSkiResort(skiResort);
 
+//
+//        beachHotel.rentApartment(1, 3);
+//        beachHotel.rentApartment(2, 3);
+//        beachHotel.rentApartment(3, 3);
+//        beachHotel.rentApartment(4, 3);
+//        beachHotel.rentApartment(5, 3);
+//
+//        beachResort.getHotel().showAvailableApartments();
+//
+//        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, guest);
 
-        beachHotel.rentApartment(1, 3);
-        beachHotel.rentApartment(2, 3);
-        beachHotel.rentApartment(3, 3);
-        beachHotel.rentApartment(4, 3);
-        beachHotel.rentApartment(5, 3);
+        Ski ski1 = new SkiK2(SkiSizeTypes.LONG);
+        skiRent.buySki(ski1, 3);
 
-        beachResort.getHotel().showAvailableApartments();
-
-        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, guest);
+        skiRent.rentSki(1, employee, 4);
     }
 }
