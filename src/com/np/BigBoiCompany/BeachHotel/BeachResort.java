@@ -20,12 +20,8 @@ public class BeachResort implements IProfitable {
         this.hotel = new BeachHotel();
     }
 
-    public void setHotel(Hotel hotel) {
-        this.hotel = hotel;
-    }
-
-    public void setBeach(Beach beach) {
-        this.beach = beach;
+    public BeachHotel getGetBeachHotel() {
+        return (BeachHotel) hotel;
     }
 
     @Override

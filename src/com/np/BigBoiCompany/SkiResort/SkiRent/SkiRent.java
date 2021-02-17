@@ -133,7 +133,7 @@ public class SkiRent {
                     + "price: " + Utility.formatNumber(skiPrice) + "$");
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
-                profit +=  putItOnTab(person, skiPrice);
+                profit += Utility.putItOnTab(person, skiPrice);
             }
 
             profit += skiPrice;
@@ -152,7 +152,7 @@ public class SkiRent {
                     + "price: " + Utility.formatNumber(skiPrice) + "$");
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
-                profit +=  putItOnTab(person, skiPrice);
+                profit += Utility.putItOnTab(person, skiPrice);
             }
 
             profit += skiPrice;
@@ -230,6 +230,12 @@ public class SkiRent {
 
         price = price * ((double) (100 - discount) / 100) * days;
         price -= price * person.getDiscount() / 100;
+
+        if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+            profit += Utility.putItOnTab(person, price);
+        } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
+            System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
+        }
 
         profit += price;
 
@@ -349,44 +355,5 @@ public class SkiRent {
     public void returnSkiAndShoes(Person person) {
         returnSki(person);
         returnShoes(person);
-    }
-
-    public double putItOnTab(Person person, double price) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Do you want to be put on your tab! If yes insert Y/y:");
-        String answer = scanner.nextLine().toLowerCase(Locale.ROOT);
-
-        if(answer.equals("y")) {
-
-            if(person.getTab() + price <= (person.getSalary() * 30) / 100) {
-
-                person.setTab(person.getTab() + price);
-                System.out.println(person.getName() + " new tab balance:" + Utility.formatNumber(person.getTab()) + "$");
-                return 0;
-
-            } else {
-
-                System.out.println("You will get over the limit:" + Utility.formatNumber((person.getSalary() * 30) / 100) + "$" +"\n"
-                        + "New balance will be: " + Utility.formatNumber(person.getTab() + price) + "$" + "\n"
-                        + "You can put part of the price on your tab and you must pay rest! If yes insert Y/y: ");
-                String answer1 = scanner.nextLine().toLowerCase(Locale.ROOT);
-
-                if(answer1.equals("y")) {
-
-                    double rest = (person.getTab() + price) - ((person.getSalary() * 30) / 100);
-                    person.setTab((person.getSalary() * 30) / 100);
-                    System.out.println(person.getName() +  " new tab balance: " + Utility.formatNumber(person.getTab()) + "$" + "\n"
-                            + "Price: " + Utility.formatNumber(rest) + "$");
-                } else {
-                    System.out.println("Refused");
-                    return price;
-                }
-            }
-        } else {
-            System.out.println("Refused");
-            return price;
-        }
-
-        return 0;
     }
 }

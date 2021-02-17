@@ -26,12 +26,6 @@ public class DinningHall {
     private final ArrayList<Order> itemsForKitchen = new ArrayList<>();
     private final HashMap<Integer, ArrayList<Order>> tableOrders = new HashMap<>();
 
-    SkiRent skiRent = new SkiRent();
-
-    public void setSkiRent(SkiRent skiRent) {
-        this.skiRent = skiRent;
-    }
-
     public DinningHall(int tables, Menu menu, Bar bar) {
         this.bar = bar;
         this.tables = tables;
@@ -186,7 +180,7 @@ public class DinningHall {
         }
 
         if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
-            profit += skiRent.putItOnTab(person, bill);
+            profit += Utility.putItOnTab(person, bill);
         } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
             System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
         }

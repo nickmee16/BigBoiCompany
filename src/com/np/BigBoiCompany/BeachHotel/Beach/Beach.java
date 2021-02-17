@@ -25,12 +25,6 @@ public class Beach {
         populateChair();
     }
 
-    SkiRent skiRent = new SkiRent();
-
-    public void setSkiRent(SkiRent skiRent) {
-        this.skiRent = skiRent;
-    }
-
     public void setBeachHotel(BeachHotel beachHotel) {
         this.beachHotel = beachHotel;
     }
@@ -109,7 +103,7 @@ public class Beach {
             System.out.println();
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
-                profit += skiRent.putItOnTab(person, price);
+                profit += Utility.putItOnTab(person, price);
             } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
                 System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
             }
