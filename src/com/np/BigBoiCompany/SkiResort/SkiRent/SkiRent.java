@@ -23,7 +23,7 @@ public class SkiRent {
     private ArrayList<SkiShoes> availableShoes = new ArrayList<>();
     private HashMap<Person, SkiShoes> takenShoes = new HashMap<>();
     private ArrayList<Slope> slopes = new ArrayList<>();
-    private HashMap<Person, SlopeType> allowedSLopes = new HashMap<>();
+    private HashMap<Person, ArrayList<SlopeType>> allowedSLopes = new HashMap<>();
 
 
     public SkiRent() {
@@ -212,9 +212,12 @@ public class SkiRent {
         }
 
         double price = 0;
+
+        ArrayList<SlopeType> slopeTypes = new ArrayList<>();
+
         for (int i = 0; i < slopeAL.size(); i++) {
             price += slopeAL.get(i).getPrice();
-            allowedSLopes.put(person, slopeAL.get(i));
+            slopeTypes.add(slopeAL.get(i));
 
             for (int y = 0; y < slopes.size(); y++) {
                 if (slopes.get(y).getSlopeType() == slopeAL.get(i)) {
@@ -222,27 +225,38 @@ public class SkiRent {
                 }
             }
         }
-        System.out.println(discount);
+
+        allowedSLopes.put(person, slopeTypes);
+
         price = price * ((double) (100 - discount) / 100) * days;
         price -= price * person.getDiscount() / 100;
 
+        profit += price;
+
         if (discount == 0) {
-            System.out.println("Total price for " + person + " is " + Utility.formatNumber(price) + "$");
+            System.out.println("Total price for " + person.getName() + " is " + Utility.formatNumber(price) + "$");
         } else {
-            System.out.println("Total with discount for package of " + slopeAL.size() + " slopes: " + Utility.formatNumber(price) + "$");
+            System.out.println("Total price with discount for package of " + slopeAL.size() + " slopes: " + Utility.formatNumber(price) + "$");
         }
     }
 
+
     public void goDownTheSlope(Person person, SlopeType slope) {
+
+        boolean hasSlope = false;
+
+        for(int i = 0; i < allowedSLopes.get(person).size(); i++) {
+            if(allowedSLopes.get(person).get(i).equals(slope)) {
+                hasSlope = true;
+            }
+        }
 
         if (!allowedSLopes.containsKey(person)) {
             System.out.println("This person has no passes for slopes");
 
-        } else if (allowedSLopes.containsKey(person) && !allowedSLopes.containsValue(slope)) {
+        } else if (allowedSLopes.containsKey(person) && !hasSlope) {
             System.out.println("This person has not pass for slope " + slope);
-        }
-
-        if (allowedSLopes.containsKey(person) && allowedSLopes.containsValue(slope)
+        } else if (allowedSLopes.containsKey(person) && hasSlope
                 && takenSki.containsKey(person)) {
 
             if (takenSki.get(person).getCondition() <= 40 && !(slope.equals(SlopeType.EASY_1) || slope.equals(SlopeType.EASY_2))) {
@@ -252,6 +266,8 @@ public class SkiRent {
                 takenSki.get(person).setCondition(takenSki.get(person).getCondition() - slope.getDmg());
                 System.out.println(person.getName() + " went down on slope " + slope + "(" + takenSki.get(person).getSki().getBrand() + ", id:" + takenSki.get(person).getId() + ", new condition:" + takenSki.get(person).getCondition() + "%)");
             }
+        } else {
+            System.out.println("Has not rented ski");
         }
     }
 
@@ -261,6 +277,8 @@ public class SkiRent {
             System.out.println("Wrong ID");
             return;
         }
+
+        boolean taken = true;
 
         for (int i = 0; i < availableSkis.size(); i++) {
 
@@ -280,7 +298,13 @@ public class SkiRent {
                             + "have been repaired (times repaired: " + availableSkis.get(i).getTimesRepaired() + ")" + "\n"
                             + "new condition: " + availableSkis.get(i).getCondition() + "%");
                 }
+                taken = false;
+                break;
             }
+        }
+
+        if(taken) {
+            System.out.println("This ski are in use");
         }
     }
 

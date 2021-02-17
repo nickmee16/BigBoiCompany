@@ -60,5 +60,30 @@ public class Test {
         skiRent.buySki(ski1, 3);
 
         skiRent.rentSki(1, employee, 4);
+
+        skiRent.rentPassForSlope(employee, 100, SlopeType.HARD_1, SlopeType.EASY_1);
+
+        skiRent.showAvailablePersonSlope();
+
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+
+        skiRent.repairSki(1);
+
+        skiRent.returnSki(employee);
+
+        skiRent.repairSki(1);
+
+        skiRent.rentSki(1, employee, 4);
+
+        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
+
     }
 }
