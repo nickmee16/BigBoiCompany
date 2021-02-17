@@ -133,7 +133,7 @@ public class SkiRent {
                     + "price: " + Utility.formatNumber(skiPrice) + "$");
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
-              profit +=  putItOnTab(person, skiPrice);
+                profit +=  putItOnTab(person, skiPrice);
             }
 
             profit += skiPrice;
@@ -239,7 +239,6 @@ public class SkiRent {
             System.out.println("Total price with discount for package of " + slopeAL.size() + " slopes: " + Utility.formatNumber(price) + "$");
         }
     }
-
 
     public void goDownTheSlope(Person person, SlopeType slope) {
 
@@ -352,7 +351,7 @@ public class SkiRent {
         returnShoes(person);
     }
 
-    private double putItOnTab(Person person, double price) {
+    public double putItOnTab(Person person, double price) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Do you want to be put on your tab! If yes insert Y/y:");
         String answer = scanner.nextLine().toLowerCase(Locale.ROOT);
@@ -368,8 +367,8 @@ public class SkiRent {
             } else {
 
                 System.out.println("You will get over the limit:" + Utility.formatNumber((person.getSalary() * 30) / 100) + "$" +"\n"
-                + "New balance will be: " + Utility.formatNumber(person.getTab() + price) + "$" + "\n"
-                + "You can put part of the price on your tab and you must pay rest! If yes insert Y/y: ");
+                        + "New balance will be: " + Utility.formatNumber(person.getTab() + price) + "$" + "\n"
+                        + "You can put part of the price on your tab and you must pay rest! If yes insert Y/y: ");
                 String answer1 = scanner.nextLine().toLowerCase(Locale.ROOT);
 
                 if(answer1.equals("y")) {
@@ -377,7 +376,7 @@ public class SkiRent {
                     double rest = (person.getTab() + price) - ((person.getSalary() * 30) / 100);
                     person.setTab((person.getSalary() * 30) / 100);
                     System.out.println(person.getName() +  " new tab balance: " + Utility.formatNumber(person.getTab()) + "$" + "\n"
-                    + "Price: " + Utility.formatNumber(rest) + "$");
+                            + "Price: " + Utility.formatNumber(rest) + "$");
                 } else {
                     System.out.println("Refused");
                     return price;

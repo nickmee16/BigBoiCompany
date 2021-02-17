@@ -8,6 +8,7 @@ import com.np.BigBoiCompany.Person.Base.PersonType;
 import com.np.BigBoiCompany.Person.Customer;
 import com.np.BigBoiCompany.SharedComponent.Base.Hotel;
 import com.np.BigBoiCompany.SharedComponent.BeachHotel;
+import com.np.BigBoiCompany.SkiResort.SkiRent.SkiRent;
 import com.np.BigBoiCompany.Utility;
 import com.np.BigBoiCompany.Person.Base.Person;
 
@@ -22,6 +23,12 @@ public class Beach {
     public Beach (BeachHotel beachHotel) {
         this.beachHotel = beachHotel;
         populateChair();
+    }
+
+    SkiRent skiRent = new SkiRent();
+
+    public void setSkiRent(SkiRent skiRent) {
+        this.skiRent = skiRent;
     }
 
     public void setBeachHotel(BeachHotel beachHotel) {
@@ -100,6 +107,13 @@ public class Beach {
             chair.getInfoChair();
             System.out.println("Price for " + person + " is " + Utility.formatNumber(price * rentHours) + "$");
             System.out.println();
+
+            if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+                profit += skiRent.putItOnTab(person, price);
+            } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
+                System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
+            }
+
             profit += price * rentHours;
         }
     }

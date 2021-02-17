@@ -12,6 +12,8 @@ import com.np.BigBoiCompany.Person.Employee;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Locale;
+import java.util.Scanner;
 
 public class BigBoiCompany {
     private ArrayList<IProfitable> assets = new ArrayList<>();
