@@ -13,6 +13,7 @@ import com.np.BigBoiCompany.SharedComponent.Base.HotelTypes;
 import com.np.BigBoiCompany.SharedComponent.BeachHotel;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.Ski;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base.SkiSizeTypes;
+import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.SkiFishcher;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.SkiK2;
 import com.np.BigBoiCompany.SkiResort.SkiRent.Ski.SkiRossignol;
 import com.np.BigBoiCompany.SkiResort.SkiRent.SkiBrands;
@@ -41,47 +42,20 @@ public class Test {
         bigBoiCompany.setRestaurant(restaurant);
         bigBoiCompany.setSkiResort(skiResort);
 
+//
+//        beachHotel.rentApartment(1, 3);
+//        beachHotel.rentApartment(2, 3);
+//        beachHotel.rentApartment(3, 3);
+//        beachHotel.rentApartment(4, 3);
+//        beachHotel.rentApartment(5, 3);
+//
+//        beachResort.getHotel().showAvailableApartments();
+//
+//        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, guest);
 
-        beachResort.getGetBeachHotel().rentApartment(1, 3);
-        beachResort.getGetBeachHotel().rentApartment(2, 3);
-        beachResort.getGetBeachHotel().rentApartment(3, 3);
-        beachResort.getGetBeachHotel().rentApartment(4, 3);
-        beachResort.getGetBeachHotel().rentApartment(5, 3);
-
-        beachResort.getHotel().showAvailableApartments();
-
-        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, employee);
+        Ski ski1 = new SkiK2(SkiSizeTypes.LONG);
+        skiRent.buySki(ski1, 3);
 
 
-//        Ski ski1 = new SkiK2(SkiSizeTypes.LONG);
-//        skiRent.buySki(ski1, 3);
-//
-//        skiRent.rentSki(1, employee, 4);
-//
-//        skiRent.rentPassForSlope(employee, 10, SlopeType.HARD_1, SlopeType.EASY_1);
-//
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//
-//        skiRent.repairSki(1);
-//
-//        skiRent.returnSki(employee);
-//
-//        skiRent.repairSki(1);
-//
-//        skiRent.rentSki(1, employee, 4);
-//
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-//        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
-
-        skiRent.rentSki(1, employee, 4);
     }
 }

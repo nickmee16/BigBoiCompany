@@ -126,11 +126,11 @@ public class SkiRent {
             skiPrice -= skiPrice * 60 / 100;
 
             System.out.println("You get extra 60% discount");
-            System.out.println("Rented Ski info" + "\n"
-                    + "ski: " + ski.getSki().getBrand() + "\n"
-                    + "length: " + ski.getSki().getLength() + "\n"
-                    + "condition: " + ski.getCondition() + "%" + "\n"
-                    + "price: " + Utility.formatNumber(skiPrice) + "$");
+            System.out.println("Rented ski info" + "\n"
+                    + "Brand: " + ski.getSki().getBrand() + "\n"
+                    + "Length: " + ski.getSki().getLength() + "\n"
+                    + "Condition: " + ski.getCondition() + "%" + "\n"
+                    + "Price: " + Utility.formatNumber(skiPrice) + "$");
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
                 profit += Utility.putItOnTab(person, skiPrice);
@@ -145,11 +145,11 @@ public class SkiRent {
             skiPrice -= skiPrice * person.getDiscount() / 100;
             System.out.println(skiPrice + " asdsd");
 
-            System.out.println("Rented Ski info" + "\n"
-                    + "ski: " + ski.getSki().getBrand() + "\n"
-                    + "length: " + ski.getSki().getLength() + "\n"
-                    + "condition: " + ski.getCondition() + "%" + "\n"
-                    + "price: " + Utility.formatNumber(skiPrice) + "$");
+            System.out.println("Rented ski info" + "\n"
+                    + "Brand: " + ski.getSki().getBrand() + "\n"
+                    + "Length: " + ski.getSki().getLength() + "\n"
+                    + "Condition: " + ski.getCondition() + "%" + "\n"
+                    + "Price: " + Utility.formatNumber(skiPrice) + "$");
 
             if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
                 profit += Utility.putItOnTab(person, skiPrice);
@@ -181,15 +181,21 @@ public class SkiRent {
                     "\n" + "Please insert correct size");
         } else {
             System.out.println("Price for " + person + " is " + Utility.formatNumber(shoePrice) + "$");
+                if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+                profit += Utility.putItOnTab(person, shoePrice);
+            } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
+                System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
+            }
             profit += (shoePrice);
         }
         System.out.println();
+
     }
 
     public void rentSkiAndShoes(int skiID, SkiShoes skiShoes, int shoeSize, Person person, int days) {
         rentSki(skiID, person, days);
         rentShoes(skiShoes, shoeSize, person, days);
-    }
+            }
 
     public void rentPassForSlope(Person person, int days, SlopeType... slope) {
         ArrayList<SlopeType> slopeAL = new ArrayList<>(Arrays.asList(slope));
@@ -226,6 +232,14 @@ public class SkiRent {
             }
         }
 
+        if(person.getPersonType().equals(PersonType.EMPLOYEE)) {
+            profit +=  Utility.putItOnTab(person, price);
+        } else if (person.getPersonType().equals(PersonType.EMPLOYEE) && person.getTab() > person.getSalary() * 30 /100) {
+            System.out.println("Sorry can't put the bill on your tab. You have reached your limit.");
+        }
+
+        System.out.println(discount);
+
         allowedSLopes.put(person, slopeTypes);
 
         price = price * ((double) (100 - discount) / 100) * days;
@@ -257,7 +271,7 @@ public class SkiRent {
         }
 
         if (!allowedSLopes.containsKey(person)) {
-            System.out.println("This person has no passes for slopes");
+            System.out.println("This person does not have a valid pass for slopes.");
 
         } else if (allowedSLopes.containsKey(person) && !hasSlope) {
             System.out.println("This person has not pass for slope " + slope);
@@ -269,7 +283,7 @@ public class SkiRent {
 
             } else {
                 takenSki.get(person).setCondition(takenSki.get(person).getCondition() - slope.getDmg());
-                System.out.println(person.getName() + " went down on slope " + slope + "(" + takenSki.get(person).getSki().getBrand() + ", id:" + takenSki.get(person).getId() + ", new condition:" + takenSki.get(person).getCondition() + "%)");
+                System.out.println(person.getName() + " went down on slope " + slope + ". Ski info and state: " + takenSki.get(person).getSki().getBrand() + ", id:" + takenSki.get(person).getId() + ", condition:" + takenSki.get(person).getCondition() + "%.");
             }
         } else {
             System.out.println("Has not rented ski");
