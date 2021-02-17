@@ -7,6 +7,7 @@ import com.np.BigBoiCompany.BigBoiCompany;
 import com.np.BigBoiCompany.Person.Customer;
 import com.np.BigBoiCompany.Person.Employee;
 import com.np.BigBoiCompany.Person.Guest;
+import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 import com.np.BigBoiCompany.Restaurant.Restaurant;
 import com.np.BigBoiCompany.SharedComponent.Base.HotelTypes;
 import com.np.BigBoiCompany.SharedComponent.BeachHotel;
@@ -28,11 +29,6 @@ public class Test {
         BigBoiCompany bigBoiCompany = new BigBoiCompany();
         BeachResort beachResort = new BeachResort("Kole");
         Restaurant restaurant = new Restaurant("Restaurant", 100);
-        BeachHotel beachHotel = new BeachHotel();
-        beachResort.setHotel(beachHotel);
-
-        Beach beach = new Beach(beachHotel);
-        beachResort.setBeach(beach);
 
         // Angie: I don't like this for some reason, better way?
         SkiRent skiRent = new SkiRent();
@@ -45,43 +41,46 @@ public class Test {
         bigBoiCompany.setRestaurant(restaurant);
         bigBoiCompany.setSkiResort(skiResort);
 
+
+        beachResort.getGetBeachHotel().rentApartment(1, 3);
+        beachResort.getGetBeachHotel().rentApartment(2, 3);
+        beachResort.getGetBeachHotel().rentApartment(3, 3);
+        beachResort.getGetBeachHotel().rentApartment(4, 3);
+        beachResort.getGetBeachHotel().rentApartment(5, 3);
+
+        beachResort.getHotel().showAvailableApartments();
+
+        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, employee);
+
+
+//        Ski ski1 = new SkiK2(SkiSizeTypes.LONG);
+//        skiRent.buySki(ski1, 3);
 //
-//        beachHotel.rentApartment(1, 3);
-//        beachHotel.rentApartment(2, 3);
-//        beachHotel.rentApartment(3, 3);
-//        beachHotel.rentApartment(4, 3);
-//        beachHotel.rentApartment(5, 3);
+//        skiRent.rentSki(1, employee, 4);
 //
-//        beachResort.getHotel().showAvailableApartments();
+//        skiRent.rentPassForSlope(employee, 10, SlopeType.HARD_1, SlopeType.EASY_1);
 //
-//        beachResort.rentBeachChair(BeachChairEnum.LEATHER, 4, guest);
-
-        Ski ski1 = new SkiK2(SkiSizeTypes.LONG);
-        skiRent.buySki(ski1, 3);
-
-        skiRent.rentSki(1, employee, 4);
-
-        skiRent.rentPassForSlope(employee, 100, SlopeType.HARD_1, SlopeType.EASY_1);
-
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-
-        skiRent.repairSki(1);
-
-        skiRent.returnSki(employee);
-
-        skiRent.repairSki(1);
-
-        skiRent.rentSki(1, employee, 4);
-
-        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
-        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//
+//        skiRent.repairSki(1);
+//
+//        skiRent.returnSki(employee);
+//
+//        skiRent.repairSki(1);
+//
+//        skiRent.rentSki(1, employee, 4);
+//
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.HARD_1);
+//        skiRent.goDownTheSlope(employee, SlopeType.EASY_1);
 
     }
 }
