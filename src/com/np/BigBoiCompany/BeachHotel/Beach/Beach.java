@@ -25,10 +25,6 @@ public class Beach {
         populateChair();
     }
 
-    public void setBeachHotel(BeachHotel beachHotel) {
-        this.beachHotel = beachHotel;
-    }
-
     public Beach() {
         populateChair();
     }
@@ -89,7 +85,7 @@ public class Beach {
                     }
                     break;
                 default:
-                    chair = new LeatherChair();
+                    chair = new LeatherChair(); // null object design pattern
                     break;
             }
 

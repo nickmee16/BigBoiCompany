@@ -22,40 +22,12 @@ public abstract class Ski {
         return brand;
     }
 
-    public void setBrand(SkiBrands brand) {
-        this.brand = brand;
-    }
-
     public double getRentPricePerDay() {
         return rentPricePerDay;
     }
 
-    public void setRentPricePerDay(double rentPricePerDay) {
-        this.rentPricePerDay = rentPricePerDay;
-    }
-
-    public double getPriceOfANewPair() {
-        return priceOfANewPair;
-    }
-
-    public void setPriceOfANewPair(double priceOfANewPair) {
-        this.priceOfANewPair = priceOfANewPair;
-    }
-
-    public double getPriceToRepair() {
-        return priceToRepair;
-    }
-
-    public void setPriceToRepair(double priceToRepair) {
-        this.priceToRepair = priceToRepair;
-    }
-
     public SkiSizeTypes getLength() {
         return length;
-    }
-
-    public void setLength(SkiSizeTypes length) {
-        this.length = length;
     }
 
     public abstract void getInfoSki();

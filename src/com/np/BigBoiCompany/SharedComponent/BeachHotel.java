@@ -14,6 +14,6 @@ public class BeachHotel extends Hotel {
 
     @Override
     public void info() {
-        System.out.println("This is a beach hotel");
+        System.out.println("This is a beach hotel :)");
     }
 }

@@ -4,6 +4,8 @@ import com.np.BigBoiCompany.BeachHotel.Beach.Beach;
 import com.np.BigBoiCompany.BeachHotel.Beach.BeachChair.Base.BeachChairEnum;
 import com.np.BigBoiCompany.BeachHotel.BeachResort;
 import com.np.BigBoiCompany.BigBoiCompany;
+import com.np.BigBoiCompany.Person.Base.Person;
+import com.np.BigBoiCompany.Person.Base.PersonType;
 import com.np.BigBoiCompany.Person.Customer;
 import com.np.BigBoiCompany.Person.Employee;
 import com.np.BigBoiCompany.Person.Guest;

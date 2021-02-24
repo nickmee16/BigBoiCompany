@@ -4,14 +4,14 @@ import com.np.BigBoiCompany.Restaurant.Menu.MenuItemsEnum;
 
 public class Order {
 
-    private MenuItemsEnum item;
+    private final MenuItemsEnum item;
     private OrderStatus status;
     private int quantity;
     private double money;
 
     public Order(MenuItemsEnum item, int quantity, double money) {
         this.item = item;
-        this.status = OrderStatus.TAKEN;
+        this.status = OrderStatus.TODO;
         this.quantity = quantity;
         this.money = money;
     }

@@ -56,7 +56,7 @@ public class SkiResort implements IProfitable {
 
     public Hotel getHotel() {
         return hotel;
-    }
+    } //TODO: not gud
 
     public void buySki(Ski ski, int numberOfPairs) {
         skiRent.buySki(ski, numberOfPairs);

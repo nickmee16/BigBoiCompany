@@ -1,5 +1,7 @@
 package com.np.BigBoiCompany.Person.Base;
 
+import com.np.BigBoiCompany.Utility;
+
 public class Person {
 
     private PersonType personType;
@@ -9,7 +11,7 @@ public class Person {
     private double salary;
     private double tab;
 
-    public Person(PersonType personType, String name, String EGN, double discount, double salary, double tab) {
+    protected Person(PersonType personType, String name, String EGN, double discount, double salary, double tab) {
         this.personType = personType;
         this.name = name;
         this.EGN = EGN;
@@ -18,7 +20,7 @@ public class Person {
         this.tab = tab;
     }
 
-    public Person(PersonType personType, String name, String EGN, double discount) {
+    protected Person(PersonType personType, String name, String EGN, double discount) {
         this.personType = personType;
         this.name = name;
         this.EGN = EGN;
@@ -29,40 +31,20 @@ public class Person {
         return personType;
     }
 
-    public void setPersonType(PersonType personType) {
-        this.personType = personType;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getEGN() {
         return EGN;
     }
 
-    public void setEGN(String EGN) {
-        this.EGN = EGN;
-    }
-
     public double getDiscount() {
         return discount;
     }
 
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
     public double getSalary() {
         return salary;
-    }
-
-    public void setSalary(double salary) {
-        this.salary = salary;
     }
 
     public double getTab() {
@@ -75,8 +57,7 @@ public class Person {
 
     @Override
     public String toString() {
-        return "{" +
-                "personType=" + personType +
+        return Utility.capitalizeName(personType.toString()) + " " +"{" +
                 ", name='" + name + '\'' +
                 ", EGN='" + EGN + '\'' +
                 ", discount=" + discount +

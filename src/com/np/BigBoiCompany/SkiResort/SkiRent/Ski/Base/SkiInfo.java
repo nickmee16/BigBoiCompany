@@ -1,4 +1,5 @@
 package com.np.BigBoiCompany.SkiResort.SkiRent.Ski.Base;
+import com.np.BigBoiCompany.SkiResort.SkiConsts;
 
 public class SkiInfo {
 
@@ -18,10 +19,6 @@ public class SkiInfo {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public Ski getSki() {
         return ski;
     }
@@ -34,15 +31,15 @@ public class SkiInfo {
         return condition;
     }
 
-    public void setCondition(int condition) {
-        this.condition = condition;
-    }
-
     public int getTimesRepaired() {
         return timesRepaired;
     }
 
-    public void setTimesRepaired(int timesRepaired) {
-        this.timesRepaired = timesRepaired;
+    public void wasRepaired() { timesRepaired +=1; }
+
+    public void repair() {
+        condition = SkiConsts.MAX_DURABILITY - timesRepaired * SkiConsts.DURABILITY_LOSS_ON_REPAIR;
     }
+
+    public void damage(int inputDamage) { condition -= inputDamage; }
 }

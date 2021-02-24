@@ -9,8 +9,4 @@ public class Guest extends Person {
         super(PersonType.GUEST, name, EGN, 10);
     }
 
-    @Override
-    public String toString() {
-        return "Guest " + super.toString();
-    }
 }

@@ -18,31 +18,15 @@ public class Slope {
         return slopeType;
     }
 
-    public void setSlopeType(SlopeType slopeType) {
-        this.slopeType = slopeType;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public int getDmg() {
         return dmg;
-    }
-
-    public void setDmg(int dmg) {
-        this.dmg = dmg;
     }
 }

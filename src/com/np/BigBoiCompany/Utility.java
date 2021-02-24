@@ -16,9 +16,9 @@ public class Utility {
     public static double putItOnTab(Person person, double price) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Do you want to be put on your tab! If yes insert Y/y:");
-        String answer = scanner.nextLine().toLowerCase(Locale.ROOT);
+        boolean wantsItOnTab = scanner.nextLine().toLowerCase(Locale.ROOT).equals("y");
 
-        if(answer.equals("y")) {
+        if(wantsItOnTab) {
 
             if(person.getTab() + price <= (person.getSalary() * 30) / 100) {
 
@@ -28,12 +28,13 @@ public class Utility {
 
             } else {
 
+                //Refactor to another function
                 System.out.println("You will get over the limit:" + Utility.formatNumber((person.getSalary() * 30) / 100) + "$" +"\n"
                         + "New balance will be: " + Utility.formatNumber(person.getTab() + price) + "$" + "\n"
                         + "You can put part of the price on your tab and you must pay rest! If yes insert Y/y: ");
-                String answer1 = scanner.nextLine().toLowerCase(Locale.ROOT);
+                boolean confirmsOverFlow = scanner.nextLine().toLowerCase(Locale.ROOT).equals("y");
 
-                if(answer1.equals("y")) {
+                if(confirmsOverFlow) {
 
                     double rest = (person.getTab() + price) - ((person.getSalary() * 30) / 100);
                     person.setTab((person.getSalary() * 30) / 100);
@@ -50,5 +51,16 @@ public class Utility {
         }
 
         return 0;
+    }
+
+    public static String capitalizeName(String inputName) {
+        char[] nameArray = inputName.toCharArray();
+
+        for (int i = 0; i < nameArray.length; i++) {
+            if (i == 0) nameArray[i] = Character.toUpperCase(nameArray[i]);
+            else nameArray[i] = Character.toLowerCase(nameArray[i]);
+        }
+
+        return new String(nameArray);
     }
 }
